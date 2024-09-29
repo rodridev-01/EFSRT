@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>José Pardo - Inicio Sesión</title>
-    <link rel="shortcut icon" href="/images/Logo.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/styles/stylegeneral.css">
+    <link rel="shortcut icon" href="./src/images/Logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./styles/stylegeneral.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
     <div class="container">
         <div class="left-content">
-            <img src="/images/logo-jose-pardo.png" alt="Logo" class="logo">
+            <img src="./src/images/logo-jose-pardo.png" alt="Logo" class="logo">
             <h1>Sistema de Gestión para las EFSRT</h1>
             <p>Plataforma que permite gestionar eficientemente la documentación de prácticas, mejorando la organización
                 y seguimiento de las actividades formativas. Automatizando el proceso de certificación, garantizando una
@@ -21,9 +21,9 @@
         </div>
         <div class="login-box">
             <div class="image-container">
-                <img src="/images/Pardo.png" alt="Logo">
+                <img src="./src/images/Pardo.png" alt="Logo">
             </div>
-            <form action="/api/login.php" method="post">
+            <form action="./src/api/login.php" method="post">
                 <select name="role" id="roleSelect" required>
                     <option value="Ninguno">¿USTED ES?</option>
                     <option value="SOLICITANTE">SOLICITANTE</option>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="links">
                     <a href="/">¿Olvidaste tu Clave?</a>
-                    <a href="Pages/registro.html" id="registerLink" style="display: none;">Regístrate</a>
+                    <a href="./registro.html" id="registerLink" style="display: none;">Regístrate</a>
                 </div>
             </form>
         </div>
