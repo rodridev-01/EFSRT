@@ -112,5 +112,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 ?>
-<button type="button" onclick="window.location.href='../'">Iniciar sesion con nueva cuenta</button> 
+<button type="button" onclick="window.location.href='../../'">Iniciar sesion con nueva cuenta</button> 
 
