@@ -122,10 +122,8 @@ $resultFut = $stmtFut->get_result();
       </div>
 
       <div class="upcoming-events">
-        <h1>Tablero</h1>
+        <h1>FUTs del Alumno</h1>
 
-        <!-- Para mostrar el fut en el dashboard -->
-        <h2>FUTs del Alumno</h2>
         <div class="fut-container">
           <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
             <div class="card fut-card">
