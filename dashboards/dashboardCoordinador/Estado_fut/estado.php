@@ -59,7 +59,7 @@ $estado = $_POST['estado'] ?? '';
         </li>
 
         <li class="nav-item">
-          <a href="formularioFUT.php">
+          <a href="../formulario_fut">
             <i class="fa fa-arrow-trend-up nav-icon"></i>
             <span class="nav-text">Tramite</span>
           </a>
@@ -102,22 +102,17 @@ $estado = $_POST['estado'] ?? '';
 
       <div class="upcoming-events">
       <div class="fut-container">
-    <h1 style="text-align: center;">Detalles del FUT</h1>
-    <div class="fut-card">
-        <div class="fut-details">
-            <p><strong>Número FUT:</strong> <?php echo htmlspecialchars($nroFut); ?></p>
-            <p><strong>Año FUT:</strong> <?php echo htmlspecialchars($anioFut); ?></p>
-            <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo htmlspecialchars($fecHorIng); ?></p>
-            <p><strong>Solicitud:</strong> <?php echo htmlspecialchars($solicito); ?></p>
-            <p><strong>Estado:</strong> <?php echo $estado == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
-        </div>
+      <h1 style="text-align: center;">Detalles del FUT</h1>
+      <div class="fut-card">
+          <div class="fut-details">
+              <p><strong>Número FUT:</strong> <?php echo htmlspecialchars($nroFut); ?></p>
+              <p><strong>Año FUT:</strong> <?php echo htmlspecialchars($anioFut); ?></p>
+              <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo htmlspecialchars($fecHorIng); ?></p>
+              <p><strong>Solicitud:</strong> <?php echo htmlspecialchars($solicito); ?></p>
+              <p><strong>Estado:</strong> <?php echo $estado == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
+          </div>
     </div>
-</div>
 
-<?php $conn->close(); ?>
-
-      </div>
-    </div>
     <div class="right-content">
       <div class="interaction-control interactions">
         <i class="fa-regular fa-envelope notified"></i>
