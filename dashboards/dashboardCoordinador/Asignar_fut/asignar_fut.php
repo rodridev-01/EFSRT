@@ -28,10 +28,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         $stmt->close();
     } else {
-        echo "Error en la preparaci¨®n de la consulta: " . $conexion->error;
+        echo "Error en la preparaciï¿½ï¿½n de la consulta: " . $conexion->error;
     }
 } else {
-    echo "Error: Solicitud no v¨¢lida.";
+    echo "Error: Solicitud no vï¿½ï¿½lida.";
 }
 
 $conexion->close();
