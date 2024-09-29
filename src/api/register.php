@@ -56,7 +56,7 @@ $stmt->bind_param("sss", $role, $email, $hashed_password);
     
 if ($stmt->execute()) {
   
-    header("Location: ../formularioSolicitante/");
+    header("Location: ../../formularios/formularioSolicitante/");
 } else {
     echo "Error: " . $stmt->error;
 }
