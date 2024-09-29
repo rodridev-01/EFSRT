@@ -18,24 +18,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado = $_POST['estado'];
 }
 
-$sqlDocente = "SELECT codLogin, usuLogin FROM login WHERE tipoLogin = 'DOCENTE'";
-$resultDocente = $conexion->query($sqlDocente);
-
-if (!$resultDocente) {
-    die("Error en la consulta de docentes: " . $conexion->error);
-}
-
-// Obtener datos del solicitante
-$sqlSolicitante = "SELECT nombres, apPaterno, apMaterno FROM solicitante WHERE codLogin = ?";
-$stmtSolicitante = $conexion->prepare($sqlSolicitante);
-$stmtSolicitante->bind_param("i", $codSoli);
-$stmtSolicitante->execute();
-$resultSolicitante = $stmtSolicitante->get_result();
-$rowSolicitante = $resultSolicitante->fetch_assoc();
-$nombres = $rowSolicitante['nombres'];
-$apPaterno = $rowSolicitante['apPaterno'];
-$apMaterno = $rowSolicitante['apMaterno'];
-
 
 $query = "SELECT apPaterno, apMaterno, nombres, tipoDocu, nroDocu, codModular, telf, celular, correoJP, correoPersonal, direccion, anioIngreso, anioEgreso FROM solicitante WHERE codLogin = ?";
 $stmt = mysqli_prepare($conexion, $query);
@@ -47,7 +29,7 @@ mysqli_stmt_close($stmt);
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="UTF-8">
