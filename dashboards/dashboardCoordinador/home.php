@@ -76,7 +76,7 @@ $resultFut = $stmtFut->get_result();
         <li class="nav-item">
           <a href="./Estado_fut/estado.php">
             <i class="fa-solid fa-chart-simple nav-icon"></i>
-            <span class="nav-text">Estado de FUTS</span>
+            <span class="nav-text">Estado</span>
           </a>
         </li>
 
@@ -109,23 +109,31 @@ $resultFut = $stmtFut->get_result();
       </div>
 
       <div class="upcoming-events">
-        <h1>Tablero</h1>
-
-        <h2>FUTs del Alumno</h2>
-        <div class="input-row">
-          <div class="especialidad">
-            <div class="form-group">
-
-              <button onclick="window.location.href='../formulariodocs/formulariosdocs.php'" class="fut-button">Subir archivos</button> 
-              <label for="especialidad">Especialidades</label>
-              
-              <select id="especialida" name="especialidad" required>
-                <option value="" disabled selected>Especialidad</option>
-                <?php include './Mostrar/Mostrar_especialidades.php'; ?>
-              </select>
-            </div>
-          </div>
-        </div>
+              <h1 style="font-size: 2rem; color: #333; margin-bottom: 10px;">Tablero</h1>
+             <h2 style="font-size: 1.5rem; color: #555; margin-bottom: 20px;">FUTs del Alumno</h2>
+              <div class="input-row" style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px;">
+                  <div class="especialidad" style="flex: 1; min-width: 250px;">
+                      <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 20px;">
+                          <button 
+                              onclick="window.location.href='../formulariodocs/formulariosdocs.php'" 
+                              class="fut-button" 
+                              style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease; margin-bottom: 10px;"
+                              onmouseover="this.style.backgroundColor='#0056b3'" 
+                              onmouseout="this.style.backgroundColor='#007bff'">
+                              Subir archivos
+                          </button>
+                          
+                          <label for="especialidad" style="font-weight: 600; margin-bottom: 8px; display: block; color: #333;">Especialidades</label>
+                          
+                          <select id="especialida" name="especialidad" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; margin-top: 5px;"
+                              onfocus="this.style.borderColor='#f7c02b'; this.style.boxShadow='0 0 5px rgba(247, 192, 43, 0.5)'" 
+                              onblur="this.style.borderColor='#ccc'; this.style.boxShadow='none'">
+                              <option value="" disabled selected>Especialidad</option>
+                              <?php include './Mostrar/Mostrar_especialidades.php'; ?>
+                          </select>
+                      </div>
+                  </div>
+              </div>
 
         <div class="fut-container">
           <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
@@ -147,6 +155,61 @@ $resultFut = $stmtFut->get_result();
               </form>
             </div>
           <?php } ?>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-content">
+      <div class="interaction-control interactions">
+        <i class="fa-regular fa-envelope notified"></i>
+        <i class="fa-regular fa-bell notified"></i>
+        <div class="toggle" onclick="switchTheme()">
+          <div class="mode-icon moon">
+            <i class="bx bxs-moon"></i>
+          </div>
+          <div class="mode-icon sun hidden">
+            <i class="bx bxs-sun"></i>
+          </div>
+        </div>
+      </div>
+
+      <div class="analytics">
+        <h1>Analisis</h1>
+        <div class="analytics-container">
+          <div class="total-events">
+            <div class="event-number card">
+              <h2>Aprobados</h2>
+              <p>1</p>
+              <i class="bx bx-check-circle"></i>
+            </div>
+            <div class="event-number card">
+              <h2>Pendientes</h2>
+              <p>2</p>
+              <i class="bx bx-timer"></i>
+            </div>
+          </div>
+
+          <div class="chart" id="doughnut-chart">
+            <h2>Porcentaje del Tramite</h2>
+            <canvas id="doughnut"></canvas>
+            <ul></ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="contacts">
+        <h1>Contactos</h1>
+        <div class="contacts-container">
+          <div class="contact-status">
+            <div class="contact-activity">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png"
+                alt="User Icon" />
+              <p>Usuario <span><a target="_blank"
+                    href="https://github.com/Alonso-dev651/EFSRT">Developer</a></span></p>
+            </div>
+            <small>1 hour ago</small>
+          </div>
         </div>
       </div>
     </div>
