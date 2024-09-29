@@ -109,31 +109,23 @@ $resultFut = $stmtFut->get_result();
       </div>
 
       <div class="upcoming-events">
-              <h1 style="font-size: 2rem; color: #333; margin-bottom: 10px;">Tablero</h1>
-             <h2 style="font-size: 1.5rem; color: #555; margin-bottom: 20px;">FUTs del Alumno</h2>
-              <div class="input-row" style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 20px;">
-                  <div class="especialidad" style="flex: 1; min-width: 250px;">
-                      <div class="form-group" style="display: flex; flex-direction: column; margin-bottom: 20px;">
-                          <button 
-                              onclick="window.location.href='../formulariodocs/formulariosdocs.php'" 
-                              class="fut-button" 
-                              style="padding: 10px 20px; background-color: #007bff; color: #fff; border: none; border-radius: 4px; cursor: pointer; transition: background-color 0.3s ease; margin-bottom: 10px;"
-                              onmouseover="this.style.backgroundColor='#0056b3'" 
-                              onmouseout="this.style.backgroundColor='#007bff'">
-                              Subir archivos
-                          </button>
-                          
-                          <label for="especialidad" style="font-weight: 600; margin-bottom: 8px; display: block; color: #333;">Especialidades</label>
-                          
-                          <select id="especialida" name="especialidad" required style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; margin-top: 5px;"
-                              onfocus="this.style.borderColor='#f7c02b'; this.style.boxShadow='0 0 5px rgba(247, 192, 43, 0.5)'" 
-                              onblur="this.style.borderColor='#ccc'; this.style.boxShadow='none'">
-                              <option value="" disabled selected>Especialidad</option>
-                              <?php include './Mostrar/Mostrar_especialidades.php'; ?>
-                          </select>
-                      </div>
-                  </div>
-              </div>
+        <h1>Tablero</h1>
+
+        <h2>FUTs del Alumno</h2>
+        <div class="input-row">
+          <div class="especialidad">
+            <div class="form-group">
+
+              <button onclick="window.location.href='../formulariodocs/formulariosdocs.php'" class="fut-button">Subir archivos</button> 
+              <label for="especialidad">Especialidades</label>
+              
+              <select id="especialida" name="especialidad" required>
+                <option value="" disabled selected>Especialidad</option>
+                <?php include './Mostrar/Mostrar_especialidades.php'; ?>
+              </select>
+            </div>
+          </div>
+        </div>
 
         <div class="fut-container">
           <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>

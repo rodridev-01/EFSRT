@@ -114,7 +114,7 @@ mysqli_stmt_close($stmt);
       </div>
 
       <div class="upcoming-events">
-      <h1>FORMULARIO FUT</h1>
+      <h1 style="text-align: center;">FORMULARIO FUT</h1>
       <form class="form-solicitud" method="POST" action="proceso_fut.php">
     <div class="input-row">
         <div>
