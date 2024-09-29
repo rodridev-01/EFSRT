@@ -273,8 +273,7 @@ body {
     padding: 20px;
 }
 
-/* DATA CONTAINER */
-.container-row-user{
+.data-container{
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -282,31 +281,9 @@ body {
     padding: 3rem;
 }
 
-.row-user-profile{
-    display: flex;
-    gap: 2rem;
-    justify-content: flex-start;
-}
-
-.data-container{
-    height: 100%;
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    padding: 2rem;
-}
-
 .data-row{
-    width: 90%;
-    justify-content: flex-start;
-    flex-direction: column;
-    gap: 0.3rem;
-}
-
-.data-row div{
-    width: 100%;
-    align-items: center;
+    display: flex;
+    gap: 2rem;
     justify-content: flex-start;
 }
 

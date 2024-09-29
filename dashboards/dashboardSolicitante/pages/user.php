@@ -156,27 +156,27 @@ $apMaterno = $rowSolicitante['apMaterno'];
               <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
             </div>
             <!--Probando container user!-->
-            <div class="container-row-user">
+            <div class="data-container">
               <?php
               if ($resultado->num_rows > 0) {
                 // Mostrar los datos de la tabla
                 while ($fila = $resultado->fetch_assoc()) {
               ?>
-                  <div class="row-user-profile">
+                  <div class="data-row">
                     <?php
                     echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
                     echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
                     echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
                     ?>
                   </div>
-                  <div class="row-user-profile">
+                  <div class="data-row">
                     <?php
                     echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
                     echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
                     echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
                     ?>
                   </div>
-                  <div class="row-user-profile">
+                  <div class="data-row">
                     <?php
                     echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
                     echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
@@ -184,7 +184,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
                     echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
                     ?>
                   </div>
-                  <div class="row-user-profile">
+                  <div class="data-row">
                     <?php
                     echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
                     echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
@@ -204,7 +204,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
                   $nomEsp = $filaEsp['nomEsp'];
 
                   ?>
-                  <div class="row-user-profile">
+                  <div class="data-row">
                     <?php
                     echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
                     echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
