@@ -5,7 +5,6 @@ error_reporting(E_ALL);
 session_start();
 include '../formulario_fut/php/db_conexion.php';
 
-// Manejo de errores de conexi��n
 if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -18,14 +17,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $estado = $_POST['estado'];
 }
 
+$sqlDocente = "SELECT codLogin, usuLogin FROM login WHERE tipoLogin = 'DOCENTE'";
+$resultDocente = $conexion->query($sqlDocente);
 
-$query = "SELECT apPaterno, apMaterno, nombres, tipoDocu, nroDocu, codModular, telf, celular, correoJP, correoPersonal, direccion, anioIngreso, anioEgreso FROM solicitante WHERE codLogin = ?";
-$stmt = mysqli_prepare($conexion, $query);
-mysqli_stmt_bind_param($stmt, 'i', $codLogin);
-mysqli_stmt_execute($stmt);
-mysqli_stmt_bind_result($stmt, $apPaterno, $apMaterno, $nombres, $tipoDocu, $nroDocu, $codModular, $telf, $celular, $correoJP, $correoPersonal, $direccion, $anioIngreso, $anioEgreso);
-mysqli_stmt_fetch($stmt);
-mysqli_stmt_close($stmt);
+if (!$resultDocente) {
+    die("Error en la consulta de docentes: " . $conexion->error);
+}
 ?>
 
 <!DOCTYPE html>
