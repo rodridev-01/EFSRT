@@ -87,7 +87,6 @@ if (password_verify($password, $hashed_password)) {
             exit();
         } else {
             header("Location: ../../dashboards/dashboardSolicitante/home.php");
-            exit();
         }
     } else {
         die("Error: Rol incorrecto.");

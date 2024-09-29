@@ -491,6 +491,83 @@ body {
   font-size: 1.15rem;
 }
 
+/* FUT FORM */
+.tipoTramite {
+  width: 25%;
+}
+
+.solicitud {
+  width: 40%;
+  height: 30px;
+  resize: none;
+  padding: 5px;
+
+}
+
+.descripcion {
+  width: 100%;
+  height: 80px;
+  resize: vertical;
+}
+
+.title_formfut {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-solicitud {
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group span {
+  display: block;
+  padding: 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.input_form[type="text"],
+.input_form[type="number"],
+.input_form[type="email"],
+.select_form {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+.input-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.input-row .form-group {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .input-row {
+    flex-direction: column;
+  }
+}
+
 /* RIGHT CONTENT */
 
 .right-content {

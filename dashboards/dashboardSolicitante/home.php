@@ -56,7 +56,7 @@ $resultFut = $stmtFut->get_result();
 
       <ul>
         <li class="nav-item">
-          <a href="Pages_Dash/user.php">
+          <a href="pages/user.php">
             <i class="fa fa-user nav-icon"></i>
             <span class="nav-text">Cuenta</span>
           </a>
@@ -101,10 +101,8 @@ $resultFut = $stmtFut->get_result();
       </li>
     </ul>
   </nav>
-
-
+  
   <?php
-
   // Captura la especialidad mediante el codigo de especialidad y lo muestra
   $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
   $stmtEsp = $conexion->prepare($sqlEsp);
