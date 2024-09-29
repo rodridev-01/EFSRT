@@ -1,7 +1,7 @@
 <?php
 session_start();
 $codSoli = $_SESSION['codLogin'];
-include 'formulario_fut/php/db_conexion.php';
+include 'src/php/db_conexion.php';
 
 // Para jalar los datos y imprimirse
 $sqlSolicitante = "SELECT nombres, apPaterno, apMaterno, codEsp FROM solicitante WHERE codLogin = ?";
@@ -70,7 +70,7 @@ $resultFut = $stmtFut->get_result();
         </li>
 
         <li class="nav-item">
-          <a href="formulario_fut/formularioFUT.php">
+          <a href="src/formularioFUT.php">
             <i class="fa fa-arrow-trend-up nav-icon"></i>
             <span class="nav-text">Tramite</span>
           </a>
@@ -101,7 +101,7 @@ $resultFut = $stmtFut->get_result();
       </li>
     </ul>
   </nav>
-  
+
   <?php
   // Captura la especialidad mediante el codigo de especialidad y lo muestra
   $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
@@ -129,7 +129,7 @@ $resultFut = $stmtFut->get_result();
         <div class="fut-container">
           <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
             <div class="card fut-card">
-              <form class="form-solicitud" action="formulario_fut/actualizar.php" method="POST" id="miFormulario" enctype="multipart/form-data">
+              <form class="form-solicitud" action="src/actualizar.php" method="POST" id="miFormulario" enctype="multipart/form-data">
                 <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
 
                 <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
