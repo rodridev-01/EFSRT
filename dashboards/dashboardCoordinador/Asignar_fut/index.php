@@ -5,9 +5,9 @@ error_reporting(E_ALL);
 session_start();
 include '../formulario_fut/php/db_conexion.php';
 
-// Manejo de errores de conexión
+// Manejo de errores de conexi锟斤拷n
 if ($conexion->connect_error) {
-    die("Error de conexión: " . $conexion->connect_error);
+    die("Error de conexi贸n: " . $conexion->connect_error);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -44,8 +44,8 @@ if (!$resultDocente) {
     <h1>Asignar Docente al FUT</h1>
 
     <div class="fut-info">
-      <p><strong>Número FUT:</strong> <?php echo htmlspecialchars($nroFut); ?></p>
-      <p><strong>Año FUT:</strong> <?php echo htmlspecialchars($anioFut); ?></p>
+      <p><strong>Numero FUT:</strong> <?php echo htmlspecialchars($nroFut); ?></p>
+      <p><strong>A帽o FUT:</strong> <?php echo htmlspecialchars($anioFut); ?></p>
       <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo htmlspecialchars($fecHorIng); ?></p>
       <p><strong>Solicitud:</strong> <?php echo htmlspecialchars($solicito); ?></p>
       <p><strong>Estado:</strong> <?php echo ($estado == 'H') ? 'Habilitado' : 'Inhabilitado'; ?></p>
@@ -56,7 +56,7 @@ if (!$resultDocente) {
       <input type="hidden" name="anioFut" value="<?php echo $anioFut; ?>">
 
       <div class="form-group">
-        <label for="descripcion">Descripción</label>
+        <label for="descripcion">Descripci锟斤拷n</label>
         <textarea name="descripcion" id="descripcion" rows="3" required></textarea>
       </div>
 

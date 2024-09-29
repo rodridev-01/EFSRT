@@ -31,7 +31,7 @@ $resultFut = $stmtFut->get_result();
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="style.css">
-  <link href="Icons_Dash/Logo.ico" rel="icon">
+  <link href="./Pages_Dash/Logo.ico" rel="icon">
   <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
@@ -128,26 +128,34 @@ $resultFut = $stmtFut->get_result();
         </div>
 
         <div class="fut-container">
-          <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
-            <div class="card fut-card">
-              <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
-              <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
-              <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
-              <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
-              <p><strong>Estado:</strong> <?php echo $rowFut['estado'] == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
+            <?php $futIndex = 0; ?>
+            <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
+              <div class="card fut-card" id="fut-card-<?php echo $futIndex; ?>" style="display: <?php echo $futIndex === 0 ? 'block' : 'none'; ?>;">
+                <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
+                <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
+                <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
+                <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
+                <p><strong>Estado:</strong> <?php echo $rowFut['estado'] == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
 
-              <form action="Asignar_fut/index.php" method="post">
-                <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
-                <input type="hidden" name="anioFut" value="<?php echo $rowFut['anioFut']; ?>">
-                <input type="hidden" name="fecHorIng" value="<?php echo $rowFut['fecHorIng']; ?>">
-                <input type="hidden" name="solicito" value="<?php echo $rowFut['solicito']; ?>">
-                <input type="hidden" name="estado" value="<?php echo $rowFut['estado']; ?>">
-                <button type="submit" class="fut-button">Asignar Docente</button>
-              </form>
-            </div>
-          <?php } ?>
-          <br>
+                <form action="Asignar_fut/index.php" method="post">
+                  <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
+                  <input type="hidden" name="anioFut" value="<?php echo $rowFut['anioFut']; ?>">
+                  <input type="hidden" name="fecHorIng" value="<?php echo $rowFut['fecHorIng']; ?>">
+                  <input type="hidden" name="solicito" value="<?php echo $rowFut['solicito']; ?>">
+                  <input type="hidden" name="estado" value="<?php echo $rowFut['estado']; ?>">
+                  <button type="submit" class="fut-button">Asignar Docente</button>
+                </form>
+              </div>
+              <?php $futIndex++; ?>
+            <?php } ?>
+            <br>
+  <!-- Botones para navegar entre tarjetas -->
+          <div class="fut-navigation">
+            <button id="prev-button" class="fut-button" onclick="prevFut()">Anterior</button>
+            <button id="next-button" class="fut-button" onclick="nextFut()">Siguiente</button>
+          </div>
         </div>
+
       </div>
     </div>
   </section>

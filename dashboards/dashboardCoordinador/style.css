@@ -1002,3 +1002,97 @@ body::-webkit-scrollbar-thumb {
     width: 100%;
   }
 }
+
+
+.fut-container {
+  text-align: center;
+}
+
+.fut-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px auto;
+  max-width: 400px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.fut-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin: 10px 5px;
+}
+
+.fut-button:hover {
+  background-color: #0056b3;
+}
+
+.fut-navigation {
+  margin-top: 20px;
+}
+
+
+.fut-container {
+  text-align: center;
+  padding: 10px;
+}
+
+.fut-card {
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 10px auto;
+  max-width: 400px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.fut-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  margin: 10px 5px;
+  font-size: 16px;
+}
+
+.fut-button:hover {
+  background-color: #0056b3;
+}
+
+.fut-navigation {
+  margin-top: 20px;
+}
+
+/* Estilos Responsive */
+@media (max-width: 768px) {
+  .fut-card {
+    max-width: 90%; 
+  }
+
+  .fut-button {
+    padding: 8px 16px; 
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fut-card {
+    max-width: 100%; 
+    padding: 15px; 
+  }
+
+  .fut-button {
+    padding: 6px 12px; 
+    font-size: 12px;
+    margin: 5px; 
+  }
+
+  .fut-navigation {
+    display: flex;
+    justify-content: space-between; 
+  }
+}
