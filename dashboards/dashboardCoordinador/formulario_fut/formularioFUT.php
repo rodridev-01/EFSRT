@@ -122,7 +122,7 @@ mysqli_stmt_close($stmt);
                 <select id="tipoTramite" name="tipoTramite" required>
                     <option value="" disabled selected>Tramites</option>
                     <?php
-                    include 'php/mostrar_tipoTramites.php';
+                    include './php/mostrar_tipoTramites.php';
                     ?>
                 </select>
             </div>
@@ -138,8 +138,8 @@ mysqli_stmt_close($stmt);
 </form>
 
 
-    <script src="js/cargarDatos.js"></script>
-    <script src="js/fechaHora.js"></script>
+    <script src="./js/cargarDatos.js"></script>
+    <script src="./js/fechaHora.js"></script>
 
 </body>
 
