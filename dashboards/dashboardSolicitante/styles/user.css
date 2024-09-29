@@ -310,10 +310,6 @@ body {
     justify-content: flex-start;
 }
 
-.data-items{
-    gap: 5px;
-}
-
 /* UPCOMING EVENTS */
 
 .upcoming-events h1 {

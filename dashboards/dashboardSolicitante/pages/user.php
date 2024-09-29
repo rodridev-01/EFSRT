@@ -63,7 +63,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
   <script defer src="../main.js"></script>
-  <title>EFSRT Dashboard</title>
+  <title>EFSRT Dashboard - Usuario</title>
 </head>
 
 <body>
@@ -155,49 +155,64 @@ $apMaterno = $rowSolicitante['apMaterno'];
             <div class="profile-container">
               <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
             </div>
+            <!--Probando container user!-->
             <?php
             if ($resultado->num_rows > 0) {
               // Mostrar los datos de la tabla
               while ($fila = $resultado->fetch_assoc()) {
-                echo "<div class='container-row-user'>";
-                echo "<div class='row-user-profile'>";
-                echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
-                echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
-                echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
-                echo "</div>";
-                echo "<div class='row-user-profile'>";
-                echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
-                echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
-                echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
-                echo "</div>";
-                echo "<div class='row-user-profile'>";
-                echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
-                echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
-                echo "<p><strong>Correo JP:</strong> " . $fila['correoJP'] . "</p>";
-                echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
-                echo "</div>";
-                echo "<div class='row-user-profile'>";
-                echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
-                echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
-                echo "<p><strong>Código de Especialidad:</strong> " . $fila['codEsp'] . "</p>";
-                echo "</div>";
+            ?>
+                <div class="container-row-user">
+                  <div class="row-user-profile">
+                    <?php
+                    echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
+                    echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
+                    echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
+                    ?>
+                  </div>
+                  <div class="row-user-profile">
+                    <?php
+                    echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
+                    echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
+                    echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
+                    ?>
+                  </div>
+                  <div class="row-user-profile">
+                    <?php
+                    echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
+                    echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
+                    echo "<p><strong>Correo JP:</strong> " . $fila['correoJP'] . "</p>";
+                    echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
+                    ?>
+                  </div>
+                  <div class="row-user-profile">
+                    <?php
+                    echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
+                    echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
+                    echo "<p><strong>Código de Especialidad:</strong> " . $fila['codEsp'] . "</p>";
+                    ?>
+                  </div>
+                  <?php
 
-                // Captura la especialidad mediante el codigo de especialidad y lo muestra
-                $codEsp = $fila['codEsp'];
-                $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
-                $stmtEsp = $conn->prepare($sqlEsp);
-                $stmtEsp->bind_param("i", $codEsp);
-                $stmtEsp->execute();
-                $resultEsp = $stmtEsp->get_result();
-                $filaEsp = $resultEsp->fetch_assoc();
-                $nomEsp = $filaEsp['nomEsp'];
+                  // Captura la especialidad mediante el codigo de especialidad y lo muestra
+                  $codEsp = $fila['codEsp'];
+                  $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
+                  $stmtEsp = $conn->prepare($sqlEsp);
+                  $stmtEsp->bind_param("i", $codEsp);
+                  $stmtEsp->execute();
+                  $resultEsp = $stmtEsp->get_result();
+                  $filaEsp = $resultEsp->fetch_assoc();
+                  $nomEsp = $filaEsp['nomEsp'];
 
-                echo "<div class='row-user-profile'>";
-                echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
-                echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
-                echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
-                echo "</div>";
-                echo "</div>";
+                  ?>
+                  <div class="row-user-profile">
+                    <?php
+                    echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
+                    echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
+                    echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
+                    ?>
+                  </div>;
+                </div>;
+            <?php
               }
             } else {
               echo "<p>No se encontraron datos para este usuario.</p>";
