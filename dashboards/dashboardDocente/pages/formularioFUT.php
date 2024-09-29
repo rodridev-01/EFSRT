@@ -112,7 +112,6 @@ mysqli_stmt_close($stmt);
                             <p>Fecha: <span id="current-date"></span></p>
                             <p>Hora: <span id="current-time"></span></p>
                         </div>
-                        <button type="button" onclick="window.location.href='../home.php'">Cancelar trámite</button>
                     </div>
                     <div class="input-row">
                         <div class="form-group">
@@ -217,7 +216,7 @@ mysqli_stmt_close($stmt);
                 </div>
 
                 <!-- Formulario para comentarios -->
-                <form class="form-solicitud" action="procesar_docente.php" method="POST" id="miFormulario" enctype="multipart/form-data">
+                <form class="form-solicitud" action="../src/procesar_docente.php" method="POST" id="miFormulario" enctype="multipart/form-data">
                     <h2>Comentarios y Estado</h2>
                     <div class="form-group">
                         <label for="comentario">Comentario</label>

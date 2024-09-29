@@ -137,7 +137,7 @@ $resultFut = $stmtFut->get_result();
                 ?>
 
                 <!-- Botón para enviar datos de este FUT -->
-              <form action="formulario_fut/formularioFUT.php" method="post">
+              <form action="pages/formularioFUT.php" method="post">
                 <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
                 <input type="hidden" name="anioFut" value="<?php echo $rowFut['anioFut']; ?>">
                 <input type="hidden" name="fecHorIng" value="<?php echo $rowFut['fecHorIng']; ?>">
