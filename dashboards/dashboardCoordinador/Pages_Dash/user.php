@@ -104,7 +104,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
         <li class="nav-item">
           <a href="#">
             <i class="fa-solid fa-chart-simple nav-icon"></i>
-            <span class="nav-text">Estado de FUTs</span>
+            <span class="nav-text">Estado</span>
           </a>
         </li>
         <br>
@@ -120,7 +120,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
 
     <ul>
       <li class="nav-item">
-        <a href="https://grupo1.live-ra.com/pruebasxamp/">
+        <a href="https://proyecto.live-ra.com">
           <i class="fa fa-right-from-bracket nav-icon"></i>
           <span class="nav-text">Salir</span>
         </a>
@@ -188,7 +188,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
                     } else {
                         echo "<p>No se encontraron datos para este usuario.</p>";
                     }
-                    // Cerrar la conexión
+
                     $stmt->close();
                     $conn->close();
                     ?>

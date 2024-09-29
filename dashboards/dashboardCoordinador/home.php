@@ -128,9 +128,8 @@ $resultFut = $stmtFut->get_result();
         </div>
 
         <div class="fut-container">
-          <?php $futIndex = 0; ?>
           <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
-            <div class="card fut-card" id="fut-card-<?php echo $futIndex; ?>" style="display: <?php echo $futIndex === 0 ? 'flex' : 'none'; ?>;">
+            <div class="fut-card">
               <div class="fut-details">
                 <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
                 <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
@@ -147,16 +146,8 @@ $resultFut = $stmtFut->get_result();
                 <button type="submit" class="fut-button">Asignar Docente</button>
               </form>
             </div>
-            <?php $futIndex++; ?>
           <?php } ?>
-          
-          <div class="fut-navigation">
-            <button id="prev-button" class="fut-nav-button" onclick="prevFut()">Anterior</button>
-            <button id="next-button" class="fut-nav-button" onclick="nextFut()">Siguiente</button>
-          </div>
         </div>
-
-
       </div>
     </div>
   </section>
