@@ -184,7 +184,7 @@ const futCards = document.querySelectorAll('.fut-card');
 
 function showFut(index) {
   futCards.forEach((card, i) => {
-    card.style.display = i === index ? 'block' : 'none';
+    card.style.display = i === index ? 'flex' : 'none';
   });
 }
 
