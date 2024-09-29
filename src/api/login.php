@@ -74,17 +74,17 @@ if (password_verify($password, $hashed_password)) {
 
         // Redirigir a la página según el rol
         if ($role === "SOPORTE") {
-            header("Location: ../personal_1/index.php");
+            header("Location: ../../dashboards/dashboardCoordinador/index.php");
             exit();
         } else if ($role === "COORDINADOR") {
-            header("Location: ../dashboardcoordinador/home.php");
+            header("Location: ../../dashboards/dashboardCoordinador/home.php");
             exit();
         } else if ($role === "DIRECTIVO") {
-            header("Location: ../dashboardirectivo/home.php");
+            header("Location: ../../dashboards/dashboardDirectivo/home.php");
         } else if ($role === "DOCENTE") {
-            header("Location: ../dashboardDocente/home.php");
+            header("Location: ../../dashboards/dashboardDocente/home.php");
         } else {
-            header("Location: ../dashboard/home.php");
+            header("Location: ../../dashboards/dashboardSolicitante/home.php");
             exit();
         }
     } else {
