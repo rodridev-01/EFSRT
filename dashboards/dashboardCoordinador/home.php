@@ -160,5 +160,4 @@ $resultFut = $stmtFut->get_result();
     </div>
   </section>
 </body>
-
 </html>
