@@ -1,0 +1,52 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+pre{
+  color: red;
+}
+
+form {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+pre{
+  color: red;
+  font-size: 20px;
+}
+label{
+  display: block;
+  margin-bottom: 5px;
+  font-size: 18px;
+}
+
+input[type="text"], input[type="number"], input[type="tel"], input[type="email"], input[type="date"], 
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: rgb(0, 0, 0);
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+select:disabled, input:disabled {
+  background-color: #ffafaf;
+}
+
+select:enabled, input:enabled{
+  background-color: #bcf7be;
+}

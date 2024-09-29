@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>José Pardo - Inicio Sesión</title>
+    <link rel="shortcut icon" href="/images/Logo.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/styles/stylegeneral.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left-content">
+            <img src="/images/logo-jose-pardo.png" alt="Logo" class="logo">
+            <h1>Sistema de Gestión para las EFSRT</h1>
+            <p>Plataforma que permite gestionar eficientemente la documentación de prácticas, mejorando la organización
+                y seguimiento de las actividades formativas. Automatizando el proceso de certificación, garantizando una
+                experiencia más ágil y precisa.</p>
+        </div>
+        <div class="login-box">
+            <div class="image-container">
+                <img src="/images/Pardo.png" alt="Logo">
+            </div>
+            <form action="/api/login.php" method="post">
+                <select name="role" id="roleSelect" required>
+                    <option value="Ninguno">¿USTED ES?</option>
+                    <option value="SOLICITANTE">SOLICITANTE</option>
+                    <option value="DOCENTE">DOCENTE</option>
+                    <option value="COORDINADOR">COORDINADOR</option>
+                    <option value="DIRECTIVO">DIRECTIVO</option>
+                    <option value="SOPORTE">SOPORTE</option>
+                </select>
+                <input type="email" name="email" id="email" placeholder="Correo Electrónico" required>
+                <div class="password-container">
+                    <input type="password" name="password" id="password" placeholder="Contraseña">
+                    <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+                </div>
+                <div class="button-group">
+                    <button class="ingresar-btn" type="submit">Ingresar</button>
+                    <button class="salir-btn" type="button" onclick="window.location.href='index.html'">Salir</button>
+                </div>
+                <div class="links">
+                    <a href="/">¿Olvidaste tu Clave?</a>
+                    <a href="Pages/registro.html" id="registerLink" style="display: none;">Regístrate</a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+
+        const roleSelect = document.getElementById('roleSelect');
+        const registerLink = document.getElementById('registerLink');
+
+        roleSelect.addEventListener('change', function () {
+            if (this.value === 'SOLICITANTE') {
+                registerLink.style.display = 'block';
+            } else {
+                registerLink.style.display = 'none';
+            }
+        });
+
+        document.getElementById('togglePassword').addEventListener('click', function () {
+            const passwordInput = document.getElementById('password');
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            this.classList.toggle('fa-eye');
+            this.classList.toggle('fa-eye-slash');
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #000;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    width: 90%;
+    max-width: 1200px;
+    background-color: #2C3E50;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid #34495E;
+}
+
+.left-content {
+    flex: 1;
+    background-color: #1a2340;
+    color: #ECF0F1;
+    padding: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.left-content .logo {
+    width: 220px;
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.left-content h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.left-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #BDC3C7;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.login-box {
+    width: 360px;
+    padding: 40px;
+    background-color: #3498DB;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: bounceIn 1s ease-out;
+}
+
+.login-box:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.image-container {
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    animation: rotateIn 1s ease-out;
+}
+
+.image-container img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 4px solid #F39C12;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.login-box select, .login-box input {
+    width: 100%;
+    padding: 15px;
+    margin: 10px 0;
+    border: none;
+    font-size: 1rem;
+    background-color: #ECF0F1;
+    animation: fadeIn 1.5s ease-in-out;
+    box-sizing: border-box;
+    border-radius: 5px; 
+}
+
+.login-box input::placeholder {
+    color: #BDC3C7;
+}
+
+.password-container {
+    position: relative;
+    margin: 10px 0;
+}
+
+.password-container input {
+    width: 100%;
+    padding: 15px;
+    padding-right: 50px;
+    font-size: 1rem;
+    background-color: #ECF0F1;
+    border: none;
+    border-radius: 5px; 
+    box-sizing: border-box;
+}
+
+.password-container .toggle-password {
+    position: absolute;
+    top: 50%;
+    right: 15px; 
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: #BDC3C7;
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.button-group button {
+    width: 48%;
+    padding: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    border-radius: 10px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.ingresar-btn {
+    background-color: #2980B9;
+    color: #ffffff;
+    animation: pulse 2s infinite;
+}
+
+.ingresar-btn:hover {
+    background-color: #1F618D;
+    transform: scale(1.05);
+}
+
+.salir-btn {
+    background-color: #F4F6F7;
+    color: #000;
+    animation: pulse 2s infinite;
+}
+
+.salir-btn:hover {
+    background-color: #BDC3C7;
+    transform: scale(1.05);
+}
+
+.links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin: 5px 0;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.links a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 400px;
+        padding: 20px; 
+    }
+
+    .left-content {
+        padding: 20px; 
+        text-align: center;
+    }
+
+    .left-content .logo {
+        width: 180px; 
+    }
+
+    .left-content h1 {
+        font-size: 2.5rem; 
+    }
+
+    .left-content p {
+        font-size: 1rem; 
+    }
+
+    .image-container {
+        top: -50px; 
+    }
+
+    .image-container img {
+        width: 80px; 
+        height: 80px;
+    }
+
+    .button-group {
+        flex-direction: column;
+        gap: 10px; 
+    }
+
+    .button-group button {
+        width: 100%;
+        font-size: 0.9rem; 
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes bounceIn {
+    from {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

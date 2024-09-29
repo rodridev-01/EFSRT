@@ -1,0 +1,5 @@
+[23-Sep-2024 23:32:09 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'kevin@gmail.com' for key 'correoPersonal' in /home/liveraco/grupo1.live-ra.com/pruebasxamp/personal_1/php/registrar_personal.php:80
+Stack trace:
+#0 /home/liveraco/grupo1.live-ra.com/pruebasxamp/personal_1/php/registrar_personal.php(80): mysqli_stmt->execute()
+#1 {main}
+  thrown in /home/liveraco/grupo1.live-ra.com/pruebasxamp/personal_1/php/registrar_personal.php on line 80
