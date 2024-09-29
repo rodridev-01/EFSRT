@@ -53,14 +53,14 @@ mysqli_stmt_close($stmt);
                     </a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="../home.php">
                         <i class="fa-solid fa-table nav-icon"></i>
                         <span class="nav-text">Tablero</span>
                     </a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a href="formularioFUT.php">
                         <i class="fa fa-arrow-trend-up nav-icon"></i>
                         <span class="nav-text">Tramite</span>
