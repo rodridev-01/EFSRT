@@ -70,7 +70,7 @@ $resultFut = $stmtFut->get_result();
         </li>
 
         <li class="nav-item">
-          <a href="src/formularioFUT.php">
+          <a href="pages/formularioFUT.php">
             <i class="fa fa-arrow-trend-up nav-icon"></i>
             <span class="nav-text">Tramite</span>
           </a>
