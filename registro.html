@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="./styles/stylegeneral.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="left-content">
+        <img src="./src/images/logo-jose-pardo.png" alt="Logo" class="logo">
+        <h1>Regístrate en el Sistema de Gestión</h1>
+        <p>Completa el formulario para crear una nueva cuenta y acceder a la plataforma de gestión de prácticas.</p>
+    </div>
+    <div class="login-box">
+        <div class="image-container">
+            <img src="./src/images/Pardo.png" alt="Registro">
+        </div>
+        <form action="./src/api/register.php" method="post" id="registerForm">
+            <input type="email" name="email" id="email" placeholder="Ingrese Correo Electrónico" required>
+            <div class="password-container">
+                <input type="password" id="password" name="password" placeholder="Ingrese una Contraseña" required>
+                <i class="fas fa-eye toggle-password" id="toggleRegisterPassword"></i>
+            </div>
+            <div class="button-group">
+                <button class="ingresar-btn" type="submit">Registrarse</button>
+                <button class="salir-btn" type="button" onclick="window.location.href='login.html'">Volver</button>
+            </div>
+            <div class="links">
+                <a href="index.html">¿Ya tienes cuenta?</a>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('toggleRegisterPassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+
+
+    const form = document.getElementById('registerForm');
+    form.addEventListener('submit', function (event) {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const validDomains = ["jpardo.edu.pe", "josepardo.edu.pe"];
+        const emailDomain = email.split('@')[1];
+
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/;
+
+        if (!validDomains.includes(emailDomain)) {
+            alert("El correo debe pertenecer a los dominios jpardo.edu.pe o josepardo.edu.pe.");
+            event.preventDefault();
+        }
+
+        if (!passwordRegex.test(password)) {
+            alert("La contraseña debe tener al menos 8 caracteres, una mayúscula, una minúscula, y un símbolo especial.");
+            event.preventDefault();
+        }
+    });
+</script>
+</body>
+</html>
