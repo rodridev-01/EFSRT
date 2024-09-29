@@ -258,6 +258,7 @@ mysqli_stmt_close($stmt);
             </div>
 
         </div>
+
         <div class="right-content">
             <div class="interaction-control interactions">
                 <i class="fa-regular fa-envelope notified"></i>
