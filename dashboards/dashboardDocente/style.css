@@ -186,6 +186,13 @@ body {
     0px 1px 8px 0px var(--shadow-color), 0px 2px 4px -1px var(--shadow-color);
 }
 
+.fut-card{
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
 /* LEFT CONTENT */
 
 .left-content {

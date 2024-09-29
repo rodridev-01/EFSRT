@@ -1,7 +1,7 @@
 <?php
 session_start();
 $codSoli = $_SESSION['codLogin'];
-include 'formulario_fut/php/db_conexion.php';
+include 'src/php/db_conexion.php';
 
 // Para jalar los datos e imprimirse
 $sqlSolicitante = "SELECT nombres, apPaterno, apMaterno FROM solicitante WHERE codLogin = ?";
@@ -22,8 +22,6 @@ $stmtFut->execute();
 $resultFut = $stmtFut->get_result();
 
 //Para jalar los datos del docente e imprimirlos
-
-
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +34,7 @@ $resultFut = $stmtFut->get_result();
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="style.css">
-  <link href="Icons_Dash/Logo.ico" rel="icon">
+  <link href="../../../src/images/Logo.ico" rel="icon">
   <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
@@ -48,7 +46,7 @@ $resultFut = $stmtFut->get_result();
   <nav class="main-menu">
     <div>
       <div class="logo">
-        <img src="Icons_Dash/Logo.ico" alt="logo" />
+        <img src="../../../src/images/Logo.ico alt=" logo" />
       </div>
 
       <div class="user-info">
@@ -58,14 +56,14 @@ $resultFut = $stmtFut->get_result();
 
       <ul>
         <li class="nav-item">
-          <a href="Pages_Dash/user.php">
+          <a href="pages/user.php">
             <i class="fa fa-user nav-icon"></i>
             <span class="nav-text">Cuenta</span>
           </a>
         </li>
-        
+
         <li class="nav-item active">
-          <a href="../dashboardDocente/home.php">
+          <a href="home.php">
             <i class="fa-solid fa-table nav-icon"></i>
             <span class="nav-text">Tablero</span>
           </a>
@@ -79,7 +77,7 @@ $resultFut = $stmtFut->get_result();
         </li>
 
         <li class="nav-item">
-          <a href="Estado_fut/estado.php">
+          <a href="pages/estado.php">
             <i class="fa-solid fa-chart-simple nav-icon"></i>
             <span class="nav-text">Estado deFUTS</span>
           </a>
@@ -96,16 +94,13 @@ $resultFut = $stmtFut->get_result();
 
     <ul>
       <li class="nav-item">
-        <a href="https://grupo1.live-ra.com/pruebasxamp/">
+        <a href="https://proyecto.live-ra.com">
           <i class="fa fa-right-from-bracket nav-icon"></i>
           <span class="nav-text">Salir</span>
         </a>
       </li>
     </ul>
   </nav>
-  
-  
-  
 
   <section class="content">
     <div class="left-content">
@@ -117,14 +112,12 @@ $resultFut = $stmtFut->get_result();
       </div>
 
       <div class="upcoming-events">
-        <h1>Tablero</h1>
-        
         <!-- Para mostrar el fut en el dashboard -->
-        <h2>FUTs Asignados</h2>
+        <h1>FUTs Asignados</h1>
         <div class="input-row">
-        <div class="especialidad">
+          <div class="especialidad">
+          </div>
         </div>
-    </div>
         <div class="fut-container">
           <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
             <div class="card fut-card">
@@ -133,22 +126,17 @@ $resultFut = $stmtFut->get_result();
               <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
               <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
               <p><strong>Estado:</strong>
-              <?php
-                if ($rowFut['estado'] == 'A')
-                {
-                    echo 'Aprobado';
+                <?php
+                if ($rowFut['estado'] == 'A') {
+                  echo 'Aprobado';
+                } else if ($rowFut['estado'] == 'D') {
+                  echo 'Desaprobado';
+                } else if ($rowFut['estado'] == 'H') {
+                  echo 'Habilitado';
                 }
-                else if ($rowFut['estado'] == 'D')
-                {
-                    echo 'Desaprobado';
-                }
-                else if ($rowFut['estado'] == 'H')
-                {
-                    echo 'Habilitado';
-                }
-              ?>
-              
-              <!-- Botón para enviar datos de este FUT -->
+                ?>
+
+                <!-- Botón para enviar datos de este FUT -->
               <form action="formulario_fut/formularioFUT.php" method="post">
                 <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
                 <input type="hidden" name="anioFut" value="<?php echo $rowFut['anioFut']; ?>">
@@ -164,7 +152,7 @@ $resultFut = $stmtFut->get_result();
       </div>
     </div>
 
-     <div class="right-content">
+    <div class="right-content">
       <div class="interaction-control interactions">
         <i class="fa-regular fa-envelope notified"></i>
         <i class="fa-regular fa-bell notified"></i>
@@ -222,5 +210,3 @@ $resultFut = $stmtFut->get_result();
 </body>
 
 </html>
-
-

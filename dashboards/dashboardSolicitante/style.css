@@ -240,22 +240,6 @@ body {
   cursor: pointer;
 }
 
-/* HEADER */
-/*
-.header {
-  margin: 0 auto;
-  width: 100%;
-}
-
-.header-mobile,
-.header-tablet {
-  display: none;
-}
-
-.header-desktop {
-  display: block;
-}
-*/
 /* UPCOMING EVENTS */
 
 .upcoming-events h1 {

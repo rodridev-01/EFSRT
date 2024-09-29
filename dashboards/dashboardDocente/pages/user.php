@@ -57,8 +57,8 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="user.css">
-  <link href="Logo.ico" rel="icon">
+  <link rel="stylesheet" href="../styles/user.css">
+  <link href="../../../src/images/Logo.ico" rel="icon">
   <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
@@ -71,7 +71,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
     <div>
       <div class="logo">
         <img
-          src="Logo.ico"
+          src="../../../src/images/Logo.ico"
           alt="logo" />
       </div>
 
@@ -81,7 +81,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
       </div>
       <ul>
         <li class="nav-item active">
-          <a href="../Pages_Dash/user.php">
+          <a href="user.php">
             <i class="fa fa-user nav-icon"></i>
             <span class="nav-text">Cuenta</span>
           </a>
@@ -102,7 +102,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
         </li>
 
         <li class="nav-item">
-          <a href="#">
+          <a href="estado.php">
             <i class="fa-solid fa-chart-simple nav-icon"></i>
             <span class="nav-text">Estado de FUTs</span>
           </a>
@@ -120,7 +120,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
 
     <ul>
       <li class="nav-item">
-        <a href="https://grupo1.live-ra.com/pruebasxamp/">
+        <a href="https://proyecto.live-ra.com">
           <i class="fa fa-right-from-bracket nav-icon"></i>
           <span class="nav-text">Salir</span>
         </a>
