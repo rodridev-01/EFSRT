@@ -1,8 +1,8 @@
 <?php
 session_start();
-include 'dashboards\dashboardSolicitante\src\php\nuevoFut.php';
+include '../src/php/nuevoFut.php';
 $codLogin = $_SESSION['codLogin'];
-include 'dashboards\dashboardSolicitante\src\php\db_conexion.php';
+include '../src/php/db_conexion.php';
 
 // Consulta para obtener los datos del solicitante
 $query = "SELECT apPaterno, apMaterno, nombres, tipoDocu, nroDocu, codModular, telf, celular, correoJP, correoPersonal, direccion, anioIngreso, anioEgreso FROM solicitante WHERE codLogin = ?";
@@ -53,14 +53,14 @@ mysqli_stmt_close($stmt);
                 </li>
 
                 <li class="nav-item active">
-                    <a href="../dashboard/home.php">
+                    <a href="../home.php">
                         <i class="fa-solid fa-table nav-icon"></i>
                         <span class="nav-text">Tablero</span>
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a href="formulario_fut/formularioFUT.php">
+                    <a href="pages/formularioFUT.php">
                         <i class="fa fa-arrow-trend-up nav-icon"></i>
                         <span class="nav-text">Tramite</span>
                     </a>
@@ -84,7 +84,7 @@ mysqli_stmt_close($stmt);
 
         <ul>
             <li class="nav-item">
-                <a href="https://grupo1.live-ra.com/pruebasxamp/">
+                <a href="https://proyecto.live-ra.com">
                     <i class="fa fa-right-from-bracket nav-icon"></i>
                     <span class="nav-text">Salir</span>
                 </a>
@@ -190,7 +190,7 @@ mysqli_stmt_close($stmt);
                             <select class="select_form" id="tipoTramite" name="tipoTramite" required>
                                 <option value="" disabled selected>Tramites</option>
                                 <?php
-                                include 'php/mostrar_tipoTramites.php';
+                                include '../src/php/mostrar_tipoTramites.php';
                                 ?>
                             </select>
                         </div>

@@ -81,7 +81,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
       </div>
       <ul>
         <li class="nav-item active">
-          <a href="../Pages_Dash/user.php">
+          <a href="pages/user.php">
             <i class="fa fa-user nav-icon"></i>
             <span class="nav-text">Cuenta</span>
           </a>
@@ -95,7 +95,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
         </li>
 
         <li class="nav-item">
-          <a href="../formulario_fut/formularioFUT.php">
+          <a href="pages/formularioFUT.php">
             <i class="fa fa-arrow-trend-up nav-icon"></i>
             <span class="nav-text">Tramite</span>
           </a>
