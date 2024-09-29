@@ -1,7 +1,7 @@
 <?php
 session_start();
 $codSoli = $_SESSION['codLogin'];
-include 'formulario_fut/php/db_conexion.php';
+include './formulario_fut/php/db_conexion.php';
 
 // Obtener datos del solicitante
 $sqlSolicitante = "SELECT nombres, apPaterno, apMaterno FROM solicitante WHERE codLogin = ?";
@@ -43,7 +43,7 @@ $resultFut = $stmtFut->get_result();
   <nav class="main-menu">
     <div>
       <div class="logo">
-        <img src="Icons_Dash/Logo.ico" alt="logo" />
+        <img src="./Pages_Dash/Logo.ico" alt="logo" />
       </div>
 
       <div class="user-info">
@@ -53,28 +53,28 @@ $resultFut = $stmtFut->get_result();
 
       <ul>
         <li class="nav-item">
-          <a href="Pages_Dash/user.php">
+          <a href="./Pages_Dash/user.php">
             <i class="fa fa-user nav-icon"></i>
             <span class="nav-text">Cuenta</span>
           </a>
         </li>
 
         <li class="nav-item active">
-          <a href="../dashboard/home.php">
+          <a href="../dashboardCoordinador/home.php">
             <i class="fa-solid fa-table nav-icon"></i>
             <span class="nav-text">Tablero</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="formulario_fut/formularioFUT.php">
+          <a href="./formulario_fut/formularioFUT.php">
             <i class="fa fa-arrow-trend-up nav-icon"></i>
             <span class="nav-text">Tramite</span>
           </a>
         </li>
 
         <li class="nav-item">
-          <a href="Estado_fut/estado.php">
+          <a href="./Estado_fut/estado.php">
             <i class="fa-solid fa-chart-simple nav-icon"></i>
             <span class="nav-text">Estado de FUTS</span>
           </a>
@@ -115,11 +115,13 @@ $resultFut = $stmtFut->get_result();
         <div class="input-row">
           <div class="especialidad">
             <div class="form-group">
-              <button onclick="window.location.href='../formulariodocs/formulariosdocs.php'" class="fut-button">Subir archivos</button>
+
+              <button onclick="window.location.href='../formulariodocs/formulariosdocs.php'" class="fut-button">Subir archivos</button> 
               <label for="especialidad">Especialidades</label>
+              
               <select id="especialida" name="especialidad" required>
                 <option value="" disabled selected>Especialidad</option>
-                <?php include 'Mostrar/Mostrar_especialidades.php'; ?>
+                <?php include './Mostrar/Mostrar_especialidades.php'; ?>
               </select>
             </div>
           </div>

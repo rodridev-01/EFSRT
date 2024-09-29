@@ -71,7 +71,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
     <div>
       <div class="logo">
         <img
-          src="Logo.ico"
+          src="./Logo.ico"
           alt="logo" />
       </div>
 
