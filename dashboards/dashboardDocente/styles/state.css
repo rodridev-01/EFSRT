@@ -239,14 +239,14 @@ body {
     margin: 16px 0 10px;
 }
 
-.user-profile div {
+.user-profile div{
     display: flex;
     justify-content: center;
 }
 
 /* USER CONTAINER */
 
-.user-container {
+.user-container{
     width: 98%;
     display: flex;
     flex-direction: row;
@@ -283,7 +283,7 @@ body {
 }
 
 /* DATA CONTAINER */
-.data-container {
+.data-container{
     height: 100%;
     width: 70%;
     display: flex;
@@ -292,20 +292,20 @@ body {
     padding: 2rem;
 }
 
-.data-row {
+.data-row{
     width: 90%;
     justify-content: flex-start;
     flex-direction: column;
     gap: 0.3rem;
 }
 
-.data-row div {
+.data-row div{
     width: 100%;
     align-items: center;
     justify-content: flex-start;
 }
 
-.data-items {
+.data-items{
     gap: 5px;
 }
 
@@ -1066,78 +1066,4 @@ body::-webkit-scrollbar-thumb {
     .chart {
         width: 100%;
     }
-}
-
-h1 {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.form-container {
-    display: flex;
-    justify-content: space-between;
-    /* Alinea ambos formularios al inicio */
-    max-width: 900px;
-    /* Define un ancho máximo para el contenedor */
-    margin: 0 auto;
-    /* Centra el contenedor */
-}
-
-.form-solicitud {
-    flex: 2;
-    /* Hacer que el formulario principal sea más ancho */
-    margin-right: 10px;
-    /* Espacio entre los formularios */
-}
-
-.side-form {
-    flex: 1;
-    /* Hacer que el formulario lateral sea más estrecho */
-}
-
-.form-solicitud,
-.side-form {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-.form-group label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-
-.input-row {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    /* Permite que los elementos se ajusten a la siguiente línea si es necesario */
-}
-
-button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
 }

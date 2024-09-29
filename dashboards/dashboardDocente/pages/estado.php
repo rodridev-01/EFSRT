@@ -133,21 +133,9 @@ $apMaterno = $rowSolicitante['apMaterno'];
                     <input type="text" placeholder="Buscar..." />
                     <i class="bx bx-search"></i>
                 </form>
-                <div class="interaction-control-mobile interactions">
-                    <i class="fa-regular fa-envelope notified"></i>
-                    <i class="fa-regular fa-bell notified"></i>
-                    <div class="toggle" onclick="switchTheme()">
-                        <div class="mode-icon moon">
-                            <i class="bx bxs-moon"></i>
-                        </div>
-                        <div class="mode-icon sun hidden">
-                            <i class="bx bxs-sun"></i>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <div class="left-content">
+            <div class="card">
                 <h1>Detalles del FUT</h1>
                 <p><strong>N��mero FUT:</strong> <?php echo htmlspecialchars($nroFut); ?></p>
                 <p><strong>A�0�9o FUT:</strong> <?php echo htmlspecialchars($anioFut); ?></p>

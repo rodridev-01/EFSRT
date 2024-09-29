@@ -46,7 +46,7 @@ $resultFut = $stmtFut->get_result();
   <nav class="main-menu">
     <div>
       <div class="logo">
-        <img src="../../../src/images/Logo.ico" alt="logo" />
+        <img src="../../src/images/Logo.ico" alt="logo" />
       </div>
 
       <div class="user-info">
