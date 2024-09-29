@@ -37,7 +37,7 @@ mysqli_stmt_close($stmt);
     <nav class="main-menu">
         <div>
             <div class="logo">
-                <img src="Icons_Dash/Logo.ico" alt="logo" />
+                <img src="../../../src/images/Logo.ico" alt="logo" />
             </div>
 
             <div class="user-info">

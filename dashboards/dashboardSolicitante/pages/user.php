@@ -58,7 +58,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
   <link rel="stylesheet" href="../styles/user.css">
-  <link href="Logo.ico" rel="icon">
+  <link href="../../../src/images/Logo.ico" rel="icon">
   <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
@@ -71,7 +71,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
     <div>
       <div class="logo">
         <img
-          src="Logo.ico"
+          src="../../../src/images/Logo.ico"
           alt="logo" />
       </div>
 
