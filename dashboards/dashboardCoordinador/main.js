@@ -177,3 +177,29 @@ function population() {
 }
 
 population();
+
+
+let currentFutIndex = 0;
+const futCards = document.querySelectorAll('.fut-card');
+
+function showFut(index) {
+  futCards.forEach((card, i) => {
+    card.style.display = i === index ? 'block' : 'none';
+  });
+}
+
+function nextFut() {
+  if (currentFutIndex < futCards.length - 1) {
+    currentFutIndex++;
+    showFut(currentFutIndex);
+  }
+}
+
+function prevFut() {
+  if (currentFutIndex > 0) {
+    currentFutIndex--;
+    showFut(currentFutIndex);
+  }
+}
+
+showFut(currentFutIndex);
