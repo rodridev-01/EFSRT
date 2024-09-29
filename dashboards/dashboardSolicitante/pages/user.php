@@ -156,12 +156,12 @@ $apMaterno = $rowSolicitante['apMaterno'];
               <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
             </div>
             <!--Probando container user!-->
-            <?php
-            if ($resultado->num_rows > 0) {
-              // Mostrar los datos de la tabla
-              while ($fila = $resultado->fetch_assoc()) {
-            ?>
-                <div class="container-row-user">
+            <div class="container-row-user">
+              <?php
+              if ($resultado->num_rows > 0) {
+                // Mostrar los datos de la tabla
+                while ($fila = $resultado->fetch_assoc()) {
+              ?>
                   <div class="row-user-profile">
                     <?php
                     echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
@@ -211,16 +211,16 @@ $apMaterno = $rowSolicitante['apMaterno'];
                     echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
                     ?>
                   </div>;
-                </div>;
-            <?php
+            </div>;
+        <?php
+                }
+              } else {
+                echo "<p>No se encontraron datos para este usuario.</p>";
               }
-            } else {
-              echo "<p>No se encontraron datos para este usuario.</p>";
-            }
-            // Cerrar la conexión
-            $stmt->close();
-            $conn->close();
-            ?>
+              // Cerrar la conexión
+              $stmt->close();
+              $conn->close();
+        ?>
           </div>
         </div>
       </div>
