@@ -3,8 +3,8 @@ session_start(); // Iniciar sesión
 
 // Verificar si existe codLogin en la sesión
 if (!isset($_SESSION['codLogin'])) {
-    echo "No se encontró un código de usuario válido. Inicia sesión nuevamente.";
-    exit;
+  echo "No se encontró un código de usuario válido. Inicia sesión nuevamente.";
+  exit;
 }
 
 // Conexión a la base de datos
@@ -18,7 +18,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar la conexión
 if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+  die("Conexión fallida: " . $conn->connect_error);
 }
 
 // Obtener el codLogin de la sesión
@@ -43,10 +43,10 @@ $stmtSolicitante->execute();
 $resultSolicitante = $stmtSolicitante->get_result();
 
 $rowSolicitante = $resultSolicitante->fetch_assoc();
-    $nombres = $rowSolicitante['nombres'];
-    $apPaterno = $rowSolicitante['apPaterno'];
-    $apMaterno = $rowSolicitante['apMaterno'];
-    
+$nombres = $rowSolicitante['nombres'];
+$apPaterno = $rowSolicitante['apPaterno'];
+$apMaterno = $rowSolicitante['apMaterno'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,11 +77,11 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
 
       <div class="user-info">
         <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
-        <p><?php echo $nombres.' '.$apPaterno.' '.$apMaterno; ?></p>
+        <p><?php echo $nombres . ' ' . $apPaterno . ' ' . $apMaterno; ?></p>
       </div>
       <ul>
         <li class="nav-item active">
-          <a href="pages/user.php">
+          <a href="user.php">
             <i class="fa fa-user nav-icon"></i>
             <span class="nav-text">Cuenta</span>
           </a>
@@ -95,7 +95,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
         </li>
 
         <li class="nav-item">
-          <a href="pages/formularioFUT.php">
+          <a href="formularioFUT.php">
             <i class="fa fa-arrow-trend-up nav-icon"></i>
             <span class="nav-text">Tramite</span>
           </a>
@@ -119,7 +119,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
 
     <ul>
       <li class="nav-item">
-        <a href="https://grupo1.live-ra.com/pruebasxamp/">
+        <a href="https://proyecto.live-ra.com">
           <i class="fa fa-right-from-bracket nav-icon"></i>
           <span class="nav-text">Salir</span>
         </a>
@@ -150,56 +150,56 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
 
       <div class="left-content">
         <div class="user-profile">
-            <h1>User profile</h1>
-            <div class="user-container">
-                <div class="profile-container">
-                    <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
-                    <?php
-                    if ($resultado->num_rows > 0) {
-                        // Mostrar los datos de la tabla
-                        while ($fila = $resultado->fetch_assoc()) {
-                            echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
-                            echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
-                            echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
-                            echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
-                            echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
-                            echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
-                            echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
-                            echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
-                            echo "<p><strong>Correo JP:</strong> " . $fila['correoJP'] . "</p>";
-                            echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
-                            echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
-                            echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
-                            echo "<p><strong>Código de Especialidad:</strong> " . $fila['codEsp'] . "</p>";
-                            
-                            
-                            // Captura la especialidad mediante el codigo de especialidad y lo muestra
-                            $codEsp = $fila['codEsp'];
-                            $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
-                            $stmtEsp = $conn->prepare($sqlEsp);
-                            $stmtEsp->bind_param("i", $codEsp);
-                            $stmtEsp->execute();
-                            $resultEsp = $stmtEsp->get_result();
-                            $filaEsp = $resultEsp->fetch_assoc();
-                            $nomEsp = $filaEsp['nomEsp'];
-                            
-                            echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
-                            
-                            
-                            echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
-                            echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
-                        }
-                    } else {
-                        echo "<p>No se encontraron datos para este usuario.</p>";
-                    }
-                    // Cerrar la conexión
-                    $stmt->close();
-                    $conn->close();
-                    ?>
-                </div>
+          <h1>User profile</h1>
+          <div class="user-container">
+            <div class="profile-container">
+              <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
+              <?php
+              if ($resultado->num_rows > 0) {
+                // Mostrar los datos de la tabla
+                while ($fila = $resultado->fetch_assoc()) {
+                  echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
+                  echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
+                  echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
+                  echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
+                  echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
+                  echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
+                  echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
+                  echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
+                  echo "<p><strong>Correo JP:</strong> " . $fila['correoJP'] . "</p>";
+                  echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
+                  echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
+                  echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
+                  echo "<p><strong>Código de Especialidad:</strong> " . $fila['codEsp'] . "</p>";
+
+
+                  // Captura la especialidad mediante el codigo de especialidad y lo muestra
+                  $codEsp = $fila['codEsp'];
+                  $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
+                  $stmtEsp = $conn->prepare($sqlEsp);
+                  $stmtEsp->bind_param("i", $codEsp);
+                  $stmtEsp->execute();
+                  $resultEsp = $stmtEsp->get_result();
+                  $filaEsp = $resultEsp->fetch_assoc();
+                  $nomEsp = $filaEsp['nomEsp'];
+
+                  echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
+
+
+                  echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
+                  echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
+                }
+              } else {
+                echo "<p>No se encontraron datos para este usuario.</p>";
+              }
+              // Cerrar la conexión
+              $stmt->close();
+              $conn->close();
+              ?>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
       <!--
       <div class="upcoming-events">
         <h1>Tablero</h1>

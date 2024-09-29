@@ -29,6 +29,7 @@ mysqli_stmt_close($stmt);
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
     <script defer src="../main.js"></script>
+    <script defer src="../src/js/fechaHora.js"></script>
     <title>Completa tu Solicitud</title>
 </head>
 
@@ -46,7 +47,7 @@ mysqli_stmt_close($stmt);
 
             <ul>
                 <li class="nav-item">
-                    <a href="pages/user.php">
+                    <a href="user.php">
                         <i class="fa fa-user nav-icon"></i>
                         <span class="nav-text">Cuenta</span>
                     </a>
@@ -60,7 +61,7 @@ mysqli_stmt_close($stmt);
                 </li>
 
                 <li class="nav-item">
-                    <a href="pages/formularioFUT.php">
+                    <a href="formularioFUT.php">
                         <i class="fa fa-arrow-trend-up nav-icon"></i>
                         <span class="nav-text">Tramite</span>
                     </a>
@@ -94,13 +95,12 @@ mysqli_stmt_close($stmt);
     <section class="content">
         <div class="left-content">
             <h2 class="title_formfut">FORMULARIO FUT</h2>
-            <form class="form-solicitud" method="POST" action="proceso_fut.php">
+            <form class="form-solicitud" method="POST" action="../src/proceso_fut.php">
                 <div class="input-row" style="margin-bottom: 10px">
                     <div>
                         <p>Fecha: <span id="current-date"></span></p>
                         <p>Hora: <span id="current-time"></span></p>
                     </div>
-                    <button type="button" onclick="window.location.href='../home.php'">Cancelar trámite</button>
                 </div>
 
                 <div class="input-row">
