@@ -128,33 +128,34 @@ $resultFut = $stmtFut->get_result();
         </div>
 
         <div class="fut-container">
-            <?php $futIndex = 0; ?>
-            <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
-              <div class="card fut-card" id="fut-card-<?php echo $futIndex; ?>" style="display: <?php echo $futIndex === 0 ? 'block' : 'none'; ?>;">
+          <?php $futIndex = 0; ?>
+          <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
+            <div class="card fut-card" id="fut-card-<?php echo $futIndex; ?>" style="display: <?php echo $futIndex === 0 ? 'flex' : 'none'; ?>;">
+              <div class="fut-details">
                 <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
                 <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
                 <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
                 <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
                 <p><strong>Estado:</strong> <?php echo $rowFut['estado'] == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
-
-                <form action="Asignar_fut/index.php" method="post">
-                  <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
-                  <input type="hidden" name="anioFut" value="<?php echo $rowFut['anioFut']; ?>">
-                  <input type="hidden" name="fecHorIng" value="<?php echo $rowFut['fecHorIng']; ?>">
-                  <input type="hidden" name="solicito" value="<?php echo $rowFut['solicito']; ?>">
-                  <input type="hidden" name="estado" value="<?php echo $rowFut['estado']; ?>">
-                  <button type="submit" class="fut-button">Asignar Docente</button>
-                </form>
               </div>
-              <?php $futIndex++; ?>
-            <?php } ?>
-            <br>
-  <!-- Botones para navegar entre tarjetas -->
+              <form action="Asignar_fut/index.php" method="post" class="fut-form">
+                <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
+                <input type="hidden" name="anioFut" value="<?php echo $rowFut['anioFut']; ?>">
+                <input type="hidden" name="fecHorIng" value="<?php echo $rowFut['fecHorIng']; ?>">
+                <input type="hidden" name="solicito" value="<?php echo $rowFut['solicito']; ?>">
+                <input type="hidden" name="estado" value="<?php echo $rowFut['estado']; ?>">
+                <button type="submit" class="fut-button">Asignar Docente</button>
+              </form>
+            </div>
+            <?php $futIndex++; ?>
+          <?php } ?>
+          
           <div class="fut-navigation">
-            <button id="prev-button" class="fut-button" onclick="prevFut()">Anterior</button>
-            <button id="next-button" class="fut-button" onclick="nextFut()">Siguiente</button>
+            <button id="prev-button" class="fut-nav-button" onclick="prevFut()">Anterior</button>
+            <button id="next-button" class="fut-nav-button" onclick="nextFut()">Siguiente</button>
           </div>
         </div>
+
 
       </div>
     </div>
