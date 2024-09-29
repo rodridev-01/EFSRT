@@ -278,15 +278,14 @@ body {
     display: flex;
     flex-direction: column;
     width: 70%;
-    gap: 2rem;
-    padding: 2rem;
+    gap: 1rem;
+    padding: 3rem;
 }
 
 .row-user-profile{
     display: flex;
-    flex-direction: row;
+    gap: 2rem;
     justify-content: flex-start;
-    
 }
 
 .data-container{
