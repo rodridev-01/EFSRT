@@ -55,14 +55,14 @@ mysqli_stmt_close($stmt);
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="#">
+                <li class="nav-item active">
+                    <a href="formularioFUT.php">
                         <i class="fa fa-arrow-trend-up nav-icon"></i>
                         <span class="nav-text">Tramite</span>
                     </a>
                 </li>
 
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a href="estado.php">
                         <i class="fa-solid fa-chart-simple nav-icon"></i>
                         <span class="nav-text">Estado de FUTs</span>

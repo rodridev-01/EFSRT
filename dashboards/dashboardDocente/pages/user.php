@@ -95,7 +95,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
         </li>
 
         <li class="nav-item">
-          <a href="#">
+          <a href="formularioFUT.php">
             <i class="fa fa-arrow-trend-up nav-icon"></i>
             <span class="nav-text">Tramite</span>
           </a>
