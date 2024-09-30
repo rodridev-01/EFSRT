@@ -102,7 +102,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
         </li>
 
         <li class="nav-item">
-          <a href="#">
+          <a href="../Estado_fut/estado.php">
             <i class="fa-solid fa-chart-simple nav-icon"></i>
             <span class="nav-text">Estado</span>
           </a>
