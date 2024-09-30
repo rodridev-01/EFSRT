@@ -146,18 +146,18 @@ $apMaterno = $rowSolicitante['apMaterno'];
                   <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
                   <div>
                     <?php
-                    echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
-                    echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
-                    echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
+                    echo "<div><span><strong>Nombres:</strong></span><p>" . $fila['nombres'] . "</p></div>";
+                    echo "<div><span><strong>Apellido Paterno:</strong></span><p>" . $fila['apPaterno'] . "</p></div>";
+                    echo "<div><span><strong>Apellido Materno:</strong></span><p>" . $fila['apMaterno'] . "</p></div>";
                     ?>
                   </div>
                 </div>
                 <div class="data-container">
                   <div class="data-row">
                     <?php
-                    echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
-                    echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
-                    echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
+                    echo "<div><span><strong>Tipo de Documento:</strong></span><p>" . $fila['tipoDocu'] . "</p></div>";
+                    echo "<div><span><strong>Número de Documento:</strong></span><p>" . $fila['nroDocu'] . "</p></div>";
+                    echo "<div><span><strong>Código Modular:</strong></span><p>" . $fila['codModular'] . "</p></div>";
                     ?>
                   </div>
                   <div class="data-row">
