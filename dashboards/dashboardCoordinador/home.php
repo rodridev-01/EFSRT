@@ -76,7 +76,7 @@ $resultFut = $stmtFut->get_result();
         <li class="nav-item">
           <a href="./Estado_fut/estado.php">
             <i class="fa-solid fa-chart-simple nav-icon"></i>
-            <span class="nav-text">Estado</span>
+            <span class="nav-text">Estado de FUTS</span>
           </a>
         </li>
 
@@ -151,60 +151,7 @@ $resultFut = $stmtFut->get_result();
       </div>
     </div>
 
-    <div class="right-content">
-      <div class="interaction-control interactions">
-        <i class="fa-regular fa-envelope notified"></i>
-        <i class="fa-regular fa-bell notified"></i>
-        <div class="toggle" onclick="switchTheme()">
-          <div class="mode-icon moon">
-            <i class="bx bxs-moon"></i>
-          </div>
-          <div class="mode-icon sun hidden">
-            <i class="bx bxs-sun"></i>
-          </div>
-        </div>
-      </div>
-
-      <div class="analytics">
-        <h1>Analisis</h1>
-        <div class="analytics-container">
-          <div class="total-events">
-            <div class="event-number card">
-              <h2>Aprobados</h2>
-              <p>1</p>
-              <i class="bx bx-check-circle"></i>
-            </div>
-            <div class="event-number card">
-              <h2>Pendientes</h2>
-              <p>2</p>
-              <i class="bx bx-timer"></i>
-            </div>
-          </div>
-
-          <div class="chart" id="doughnut-chart">
-            <h2>Porcentaje del Tramite</h2>
-            <canvas id="doughnut"></canvas>
-            <ul></ul>
-          </div>
-        </div>
-      </div>
-
-      <div class="contacts">
-        <h1>Contactos</h1>
-        <div class="contacts-container">
-          <div class="contact-status">
-            <div class="contact-activity">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png"
-                alt="User Icon" />
-              <p>Usuario <span><a target="_blank"
-                    href="https://github.com/Alonso-dev651/EFSRT">Developer</a></span></p>
-            </div>
-            <small>1 hour ago</small>
-          </div>
-        </div>
-      </div>
-    </div>
+    
   </section>
 </body>
 </html>

@@ -1,94 +1,82 @@
 <?php
-  include 'db_conexion.php';
+include 'db_conexion.php';
 
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtener datos del formulario
+    $departamento = $_POST['departamento'];
+    $provincia = $_POST['provincia'];
+    $distrito = $_POST['distrito'];
 
-      $departamento = $_POST['departamento'];
-      $provincia = $_POST['provincia'];
-      $distrito = $_POST['distrito'];
+    // Obtener el código de ubigeo
+    $queryUbigeo = "CALL obtener_codigo_ubigeo(?, ?, ?)";
+    $stmtUbigeo = $conexion->prepare($queryUbigeo);
+    $stmtUbigeo->bind_param("sss", $departamento, $provincia, $distrito);
+    $stmtUbigeo->execute();
+    $resultUbigeo = $stmtUbigeo->get_result();
 
-      $queryUbigeo = "CALL obtener_codigo_ubigeo(?, ?, ?)";
-      $stmtUbigeo = $conexion->prepare($queryUbigeo);
-      $stmtUbigeo->bind_param("sss", $departamento, $provincia, $distrito);
-      $stmtUbigeo->execute();
-      $resultUbigeo = $stmtUbigeo->get_result();
+    if ($resultUbigeo->num_rows > 0) {
+        $rowUbigeo = $resultUbigeo->fetch_assoc();
+        $codDis = $rowUbigeo['codUbi'];
+    } else {
+        echo "No se encontró el código de ubigeo para el distrito seleccionado.";
+        exit();
+    }
+    $stmtUbigeo->close();
 
-      if ($resultUbigeo->num_rows > 0) {
-          $rowUbigeo = $resultUbigeo->fetch_assoc();
-          $codDis = $rowUbigeo['codUbi'];
-      } else {
-          echo "No se encontró el código de ubigeo para el distrito seleccionado.";
-          exit();
-      }
-      $stmtUbigeo->close();
+    // Datos adicionales del formulario
+    $tipoPersonal = $_POST['tipoPersonal'];
+    $apellidoPaterno = $_POST['apellidoPaterno'];
+    $apellidoMaterno = $_POST['apellidoMaterno'];
+    $nombresPersonal = $_POST['nombresPersonal'];
+    $tipoDocumento = $_POST['tipoDocumento'];
+    $nroDocumento = $_POST['nroDocumento'];
+    $telefono = $_POST['telefono'];
+    $celular = $_POST['celular'];
+    $correoJP = $_POST['correoJosePardo'];
+    $correoPersonal = $_POST['correoPersonal'];
+    $direccion = $_POST['direccion'];
+    $codEsp = isset($_POST['codigoEspecialidad']) ? $_POST['codigoEspecialidad'] : NULL;
+    $estable = isset($_POST['estable']) ? $_POST['estable'] : NULL;
+    $anioNombramiento = isset($_POST['anioNombramiento']) ? $_POST['anioNombramiento'] : NULL;
+    $anioCese = isset($_POST['anioCese']) ? $_POST['anioCese'] : NULL;
+    $codigoPlaza = $_POST['codigoPlaza'];
+    $anioIngreso = isset($_POST['anioContrato']) ? $_POST['anioContrato'] : NULL;
+    $inicioContrato = isset($_POST['inicioContrato']) ? $_POST['inicioContrato'] : NULL;
+    $finContrato = isset($_POST['finContrato']) ? $_POST['finContrato'] : NULL;
+    $estadoPersonal = $_POST['estadoPersonal'];
 
-      $tipoPersonal = $_POST['tipoPersonal'];
-      $apellidoPaterno = $_POST['apellidoPaterno'];
-      $apellidoMaterno = $_POST['apellidoMaterno'];
-      $nombresPersonal = $_POST['nombresPersonal'];
-      $tipoDocumento = $_POST['tipoDocumento'];
-      $nroDocumento = $_POST['nroDocumento'];
-      $telefono = $_POST['telefono'];
-      $celular = $_POST['celular'];
-      $correoJP = $_POST['correoJosePardo'];
-      $correoPersonal = $_POST['correoPersonal'];
-      $direccion = $_POST['direccion'];
-      $codEsp = isset($_POST['codigoEspecialidad']) ? $_POST['codigoEspecialidad'] : NULL;
-      $estable = isset($_POST['estable']) ? $_POST['estable'] : NULL;
-      $anioNombramiento = isset($_POST['anioNombramiento']) ? $_POST['anioNombramiento'] : NULL;
-      $anioCese = isset($_POST['anioCese']) ? $_POST['anioCese'] : NULL;
-      $codigoPlaza = $_POST['codigoPlaza'];
-      $anioIngreso = isset($_POST['anioContrato']) ? $_POST['anioContrato'] : NULL;
-      $inicioContrato = isset($_POST['inicioContrato']) ? $_POST['inicioContrato'] : NULL;
-      $finContrato = isset($_POST['finContrato']) ? $_POST['finContrato'] : NULL;
-      $estadoPersonal = $_POST['estadoPersonal'];
+    // Datos para la tabla login
+    $tipoLogin = $tipoPersonal;
+    $usuario = $correoJP;
+    $contraseñaOriginal = 'Soporte2024$';
+    $contraseñaHasheada = password_hash($contraseñaOriginal, PASSWORD_BCRYPT);
 
-      $tipoLogin = $tipoPersonal;
-      $usuario = $correoJP;
-      $contraseña = '';
-      
-      $sql_ultimo_codLogin = "SELECT MAX(codLogin) AS ultimoCodLogin FROM login";
-      $result = $conexion->query($sql_ultimo_codLogin);
-      $row = $result->fetch_assoc();
+    // Llamar al procedimiento almacenado 'registrar_personal'
+    $queryRegistrarPersonal = "CALL registrar_personal(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $stmtRegistrarPersonal = $conexion->prepare($queryRegistrarPersonal);
+    
+    $stmtRegistrarPersonal->bind_param(
+        "sssssssssssssssisiisisss",
+        $tipoLogin, $usuario, $contraseñaHasheada, $tipoPersonal, $apellidoPaterno, $apellidoMaterno, 
+        $nombresPersonal, $tipoDocumento, $nroDocumento, $telefono, $celular, $correoJP, 
+        $correoPersonal, $direccion, $codDis, $codEsp, $estable, $anioNombramiento, 
+        $anioCese, $codigoPlaza, $anioIngreso, $inicioContrato, $finContrato, $estadoPersonal
+    );
 
-      if ($row['ultimoCodLogin'] !== NULL) {
-          $nuevoCodLogin = $row['ultimoCodLogin'] + 1;
-      } else {
-          $nuevoCodLogin = 1;
-      }
+    if ($stmtRegistrarPersonal->execute()) {
+        $result = $stmtRegistrarPersonal->get_result();
+        $row = $result->fetch_assoc();
+        $codLogin = $row['codigoLogin']; // Código de login generado
+        // echo "Registro del personal realizado con éxito. Código de login: $codLogin. <a href='../index.php'>Ver Lista</a>";
+        header("location:../index.php");
+    } else {
+        echo "Error al registrar el personal: " . $stmtRegistrarPersonal->error;
+    }
 
-      $sql_login = "INSERT INTO login (codLogin, tipoLogin, usuLogin, passLogin, estadoLogin) 
-                    VALUES (?, ?, ?, ?, 'H')";
-
-      $stmt_login = $conexion->prepare($sql_login);
-      $stmt_login->bind_param("isss", $nuevoCodLogin, $tipoLogin, $usuario, $contraseña);
-
-      if ($stmt_login->execute()) {
-          $codLogin = $nuevoCodLogin;
-
-          $sql_personal = "INSERT INTO personal (codLogin, tipoPer, apPaterno, apMaterno, nombres, tipoDocu, nroDocu, 
-                          telf, celular, correoJP, correoPersonal, direccion, codDis, codEsp, estable, anioNombramiento, 
-                          anioCese, codigoPlaza, anioIngresoContratado, fechaIniContrato, fechaTerContrato, estado) 
-                          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-          $stmt_personal = $conexion->prepare($sql_personal);
-          $stmt_personal->bind_param("issssssssssssisiisisss", $codLogin, $tipoPersonal, $apellidoPaterno, $apellidoMaterno, 
-                                    $nombresPersonal, $tipoDocumento, $nroDocumento, $telefono, $celular, $correoJP, 
-                                    $correoPersonal, $direccion, $codDis, $codEsp, $estable, $anioNombramiento, 
-                                    $anioCese, $codigoPlaza, $anioIngreso, $inicioContrato, $finContrato, $estadoPersonal);
-
-          if ($stmt_personal->execute()) {
-              echo "Registro del personal realizado con éxito. <a href='../index.php'>Ver Lista</a>";
-          } else {
-              echo "Error al insertar en la tabla personal: " . $stmt_personal->error;
-          }
-      } else {
-          echo "Error al insertar en la tabla login: " . $stmt_login->error;
-      }
-
-      $conexion->close();
-  } else {
-      echo "Método no permitido.";
-  }
-
+    // Cerrar la conexión
+    $stmtRegistrarPersonal->close();
+    $conexion->close();
+} else {
+    echo "Método no permitido.";
+}
 ?>

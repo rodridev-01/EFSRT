@@ -1,3 +1,26 @@
+<?php
+include ("php/db_conexion.php");
+
+// Usar el valor fijo 74
+$codLoginFijo = 74;
+
+// Consultar los datos del registro para el codLogin fijo
+$sql = "SELECT * FROM personal WHERE codLogin = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $codLoginFijo);  
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $personal = $result->fetch_assoc();
+
+    $apellidoPaterno = $personal['apPaterno'];
+    $apellidoMaterno = $personal['apMaterno'];
+    $nombresPersonal = $personal['nombres'];
+} else {
+    echo "No se encontraron datos para el codLogin proporcionado.";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -36,17 +59,18 @@
             <div class="user-info">
                 <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
                 <p>Soporte</p>
+                <!-- <p><?php //echo isset($nombresPersonal) ? $nombresPersonal . ' ' . $apellidoPaterno . ' ' . $apellidoMaterno : ''; ?></p> -->
             </div>
             <ul>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="Pages_Dash/user.php">
                         <i class="fa fa-user nav-icon"></i>
                         <span class="nav-text">Cuenta</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="nav-item active">
-                    <a href="../index.php">
+                    <a href="index.php">
                         <i class="fa-solid fa-table nav-icon"></i>
                         <span class="nav-text">Tablero</span>
                     </a>
@@ -89,17 +113,17 @@
         <div class="left-content">
 
             <?php
-      include "php/db_conexion.php";
-    ?>
-            <pre>
-      -Falta validaciones en varios campos.
-      -NO REGISTRAR el mismo CORREOJP O DARA ERROR.
-      -CORREO JP SE CONSIDERA USUARIO POR EL MOMENTO.
-      -TODOS LOS USUARIOS REGISTRADOS DEBEN ESTAR EN LA TABLA LOGIN
-      -SE OBTIENE EL VALOR MAS ALTO DEL codLogin QUE EXISTA EN LA TABLA
-      LOGIN Y SE LE SUMA 1, YA QUE NO Esta
-      COMO CAMPO AUTO INCREMENT. (GARANTIZA SER ÚNICO)
-    </pre>
+                include "php/db_conexion.php";
+            ?>
+            <!-- <pre>
+                -Falta validaciones en varios campos.
+                -NO REGISTRAR el mismo CORREOJP O DARA ERROR.
+                -CORREO JP SE CONSIDERA USUARIO POR EL MOMENTO.
+                -TODOS LOS USUARIOS REGISTRADOS DEBEN ESTAR EN LA TABLA LOGIN
+                -SE OBTIENE EL VALOR MAS ALTO DEL codLogin QUE EXISTA EN LA TABLA
+                LOGIN Y SE LE SUMA 1, YA QUE NO Esta
+                COMO CAMPO AUTO INCREMENT. (GARANTIZA SER ÚNICO)
+            </pre> -->
 
             <form id="personalForm" method="POST" action="php/registrar_personal.php">
                 <label for="tipoPersonal">Tipo de Personal</label>
@@ -141,12 +165,12 @@
                 <br><br>
 
                 <label for="nroDocumento">Número de Documento</label>
-                <input type="text" name="nroDocumento" id="nroDocumento" required disabled maxlength="15" oninput="soloNumeros(event)">
+                <input type="text" name="nroDocumento" id="nroDocumento" required disabled maxlength="15">
 
                 <br><br>
 
                 <label for="telefono">Teléfono Fijo</label>
-                <input type="tel" name="telefono" id="telefono" required disabled maxlength="7"
+                <input type="tel" name="telefono" id="telefono" required disabled maxlength="30"
                     oninput="soloNumeros(event)">
 
                 <br><br>
@@ -158,8 +182,8 @@
                 <br><br>
 
                 <label for="correoJosePardo">Correo Electrónico Institucional</label>
-                <input type="email" name="correoJosePardo" id="correoJosePardo" required disabled maxlength="80" placeholder="@jpardo.edu.pe"  oninput="validarCorreo(event)">
-                   
+                <input type="email" name="correoJosePardo" id="correoJosePardo" placeholder="UNICO" required disabled
+                    maxlength="80">
 
                 <br><br>
 
@@ -172,6 +196,7 @@
                 <select name="departamento" id="departamento" required disabled>
                     <option value="" selected disabled>--Seleccione un departamento--</option>
                 </select>
+
 
                 <label for="provincia">Provincia:</label>
                 <select name="provincia" id="provincia" required disabled>
@@ -249,141 +274,7 @@
                 <button type="submit">Agregar</button>
             </form>
 
-            <!-- añadiendo para aplicar bootstrap -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-                integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-                crossorigin="anonymous">
-            </script>
 
-
-
-
-
-
-
-
-            <!-- <div class="search-and-check">
-        <form class="search-box">
-          <input type="text" placeholder="Buscar..." />
-          <i class="bx bx-search"></i>
-        </form>
-        <div class="interaction-control-mobile interactions">
-          <i class="fa-regular fa-envelope notified"></i>
-          <i class="fa-regular fa-bell notified"></i>
-          <div class="toggle" onclick="switchTheme()">
-            <div class="mode-icon moon">
-              <i class="bx bxs-moon"></i>
-            </div>
-            <div class="mode-icon sun hidden">
-              <i class="bx bxs-sun"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="upcoming-events">
-        <h1>Tablero</h1>
-        <div class="event-container">
-          <div class="card event-card">
-            <div class="event-header">
-              <img
-                src="https://comers.com.pe/wp-content/uploads/classified-listing/2024/01/servicio-tecnico-pc-san-isidro.png"
-                alt="" />
-              <p>CI 1° Módulo</p>
-              <i class="bx bx-heart like-btn"></i>
-            </div>
-            <div class="event-content">
-              <h2>Mantenimiento de Equipos de Cómputo</h2>
-              <p>Practicas 1er Modulo</p>
-            </div>
-            <div class="event-footer">
-              <p style="background-color: #e48e2c">Pendiente</p>
-              <div class="btn-group">
-                <button>Consultar</button>
-                <div class="share">
-                  <button class="share-btn">
-                    <i class="fa-solid fa-share"></i>
-                  </button>
-                  <ul class="popup">
-                    <li>
-                      <a href="#" style="color: rgb(79, 153, 213)"><i class="bx bxl-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#" style="color: rgb(34, 173, 34)"><i class="bx bxl-whatsapp"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card event-card">
-            <div class="event-header">
-              <img
-                src="https://www.microtech.es/hubfs/37228729_m.jpg"
-                alt="" />
-              <p>CI 2° Módulo</p>
-              <i class="bx bx-heart like-btn"></i>
-            </div>
-            <div class="event-content">
-              <h2>Base de Datos</h2>
-              <p>Practicas 2do Módulo</p>
-            </div>
-            <div class="event-footer">
-              <p style="background-color: #4a920f">Completo</p>
-              <div class="btn-group">
-                <button>Consultar</button>
-                <div class="share">
-                  <button class="share-btn">
-                    <i class="fa-solid fa-share"></i>
-                  </button>
-                  <ul class="popup">
-                    <li>
-                      <a href="#" style="color: rgb(79, 153, 213)"><i class="bx bxl-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#" style="color: rgb(34, 173, 34)"><i class="bx bxl-whatsapp"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="reviews">
-        <h1>Evaluación del Docente</h1>
-        <div class="review-container">
-          <div class="card review-card">
-            <h2>Raul Salazar (Prácticas 1° Módulo)</h2>
-            <div class="ratings">
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bx-star"></i>
-              <i class="bx bx-star"></i>
-            </div>
-            <p>
-              El estudiante mostró buenas habilidades, pero su informe requiere más claridad y mejor organización.
-            </p>
-          </div>
-
-          <div class="card review-card">
-            <h2>Daniel Ramos (Prácticas 2° Módulo)</h2>
-            <div class="ratings">
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star-half"></i>
-            </div>
-            <p>
-              El estudiante mostró buenas habilidades; el informe está bien y cumple con los requisitos.
-            </p>
-          </div>
-        </div>
-      </div> -->
         </div>
 
         <div class="right-content">
@@ -430,8 +321,7 @@
                     <div class="contact-status">
                         <div class="contact-activity">
                             <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="User Icon" />
-                            <p>Usuario <span><a target="_blank"
-                                        href="https://github.com/Alonso-dev651">Developer</a></span></p>
+                            <p>Usuario <span><a href="#">Developer</a></span></p>
                         </div>
                         <small>1 hour ago</small>
                     </div>
@@ -442,7 +332,11 @@
 
     <script src="js/ubigeo.js"></script>
     <script src="js/formulario.js"></script>
-    <script src="js/validaciones.js"></script>
+
+    <!-- añadiendo para aplicar bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 </body>
 
 </html>

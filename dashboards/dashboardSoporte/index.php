@@ -1,3 +1,26 @@
+<?php
+include ("php/db_conexion.php");
+
+// Usar el valor fijo 74
+$codLoginFijo = 74;
+
+// Consultar los datos del registro para el codLogin fijo
+$sql = "SELECT * FROM personal WHERE codLogin = ?";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("i", $codLoginFijo);  
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $personal = $result->fetch_assoc();
+
+    $apellidoPaterno = $personal['apPaterno'];
+    $apellidoMaterno = $personal['apMaterno'];
+    $nombresPersonal = $personal['nombres'];
+} else {
+    echo "No se encontraron datos para el codLogin proporcionado.";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,14 +57,15 @@
             <div class="user-info">
                 <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
                 <p>Soporte</p>
+                <!-- <p><?php //echo isset($nombresPersonal) ? $nombresPersonal . ' ' . $apellidoPaterno . ' ' . $apellidoMaterno : ''; ?></p> -->
             </div>
             <ul>
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="Pages_Dash/user.php">
                         <i class="fa fa-user nav-icon"></i>
                         <span class="nav-text">Cuenta</span>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="nav-item active">
                     <a href="index.php">
@@ -93,9 +117,9 @@
             <hr>
 
 
-            <div class="">
-                <table class="table">
-                    <thead class="bg">
+            <form action="" class="col-5">
+                <table class="table table-striped">
+                    <thead class="table-dark">
                         <tr>
 
                             <th scope="col">Apellido Paterno</th>
@@ -103,7 +127,7 @@
                             <th scope="col">Nombres</th>
                             <th scope="col">Nro Doc</th>
                             <th scope="col">Celular</th>
-                            <th scope="col">Correo JP</th>
+                            <th scope="col">Correo Institucional</th>
                             <th scope="col">Correo Personal</th>
                             <th scope="col">Estado</th>
                             <th scope="col">Tipo Personal</th>
@@ -112,11 +136,12 @@
                     <tbody>
 
                         <?php
-              include "php/db_conexion.php";
-              $sql = $conexion -> query("Select * from personal");
-              while ($datos = $sql -> fetch_object()) {
+                            include "php/db_conexion.php";
+                            $sql = $conexion -> query("Select * from personal");
+                            while ($datos = $sql -> fetch_object()) {
                 
-            ?>
+                        ?>
+
                         <tr>
                             <td><?= $datos -> apPaterno?></td>
                             <td><?= $datos -> apMaterno?></td>
@@ -127,150 +152,27 @@
                             <td><?= $datos -> correoPersonal?></td>
                             <td><?= $datos -> estado?></td>
                             <td><?= $datos -> tipoPer?></td>
-                             <!-- 
                             <td>
-                                <a href="" class="btn btn-small btn-warning"><i
-                                        class="fa-solid fa-user-pen"> Editar</i></a>
+                                <a href="modificar_personal.php? id=<?= $datos -> codLogin ?>"
+                                    class="btn btn-small btn-warning"><i class="fa-solid fa-user-pen">Editar</i></a>
                             </td>
-                            -->
                         </tr>
+
                         <?php
-              }
-            ?>
+                            }
+                        ?>
 
                     </tbody>
                 </table>
-                <a href="prueba.php" class="btn btn-small btn-success"><i
-                        class="fa-solid fa-address-card"></i>
-                    Registrar Personal</a>
-            </div>
+            </form>
 
-
-
-
-            <!-- <div class="search-and-check">
-        <form class="search-box">
-          <input type="text" placeholder="Buscar..." />
-          <i class="bx bx-search"></i>
-        </form>
-        <div class="interaction-control-mobile interactions">
-          <i class="fa-regular fa-envelope notified"></i>
-          <i class="fa-regular fa-bell notified"></i>
-          <div class="toggle" onclick="switchTheme()">
-            <div class="mode-icon moon">
-              <i class="bx bxs-moon"></i>
-            </div>
-            <div class="mode-icon sun hidden">
-              <i class="bx bxs-sun"></i>
-            </div>
-          </div>
+            <a href="registrar_personal.php" class="btn btn-small btn-success"><i class="fa-solid fa-address-card"></i>
+                Registrar Personal</a>
         </div>
-      </div>
 
-      <div class="upcoming-events">
-        <h1>Tablero</h1>
-        <div class="event-container">
-          <div class="card event-card">
-            <div class="event-header">
-              <img
-                src="https://comers.com.pe/wp-content/uploads/classified-listing/2024/01/servicio-tecnico-pc-san-isidro.png"
-                alt="" />
-              <p>CI 1° Módulo</p>
-              <i class="bx bx-heart like-btn"></i>
-            </div>
-            <div class="event-content">
-              <h2>Mantenimiento de Equipos de Cómputo</h2>
-              <p>Practicas 1er Modulo</p>
-            </div>
-            <div class="event-footer">
-              <p style="background-color: #e48e2c">Pendiente</p>
-              <div class="btn-group">
-                <button>Consultar</button>
-                <div class="share">
-                  <button class="share-btn">
-                    <i class="fa-solid fa-share"></i>
-                  </button>
-                  <ul class="popup">
-                    <li>
-                      <a href="#" style="color: rgb(79, 153, 213)"><i class="bx bxl-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#" style="color: rgb(34, 173, 34)"><i class="bx bxl-whatsapp"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card event-card">
-            <div class="event-header">
-              <img
-                src="https://www.microtech.es/hubfs/37228729_m.jpg"
-                alt="" />
-              <p>CI 2° Módulo</p>
-              <i class="bx bx-heart like-btn"></i>
-            </div>
-            <div class="event-content">
-              <h2>Base de Datos</h2>
-              <p>Practicas 2do Módulo</p>
-            </div>
-            <div class="event-footer">
-              <p style="background-color: #4a920f">Completo</p>
-              <div class="btn-group">
-                <button>Consultar</button>
-                <div class="share">
-                  <button class="share-btn">
-                    <i class="fa-solid fa-share"></i>
-                  </button>
-                  <ul class="popup">
-                    <li>
-                      <a href="#" style="color: rgb(79, 153, 213)"><i class="bx bxl-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#" style="color: rgb(34, 173, 34)"><i class="bx bxl-whatsapp"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
 
-      <div class="reviews">
-        <h1>Evaluación del Docente</h1>
-        <div class="review-container">
-          <div class="card review-card">
-            <h2>Raul Salazar (Prácticas 1° Módulo)</h2>
-            <div class="ratings">
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bx-star"></i>
-              <i class="bx bx-star"></i>
-            </div>
-            <p>
-              El estudiante mostró buenas habilidades, pero su informe requiere más claridad y mejor organización.
-            </p>
-          </div>
-
-          <div class="card review-card">
-            <h2>Daniel Ramos (Prácticas 2° Módulo)</h2>
-            <div class="ratings">
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star-half"></i>
-            </div>
-            <p>
-              El estudiante mostró buenas habilidades; el informe está bien y cumple con los requisitos.
-            </p>
-          </div>
-        </div>
-      </div> -->
-        </div>
+        <!-- Contenido lado derecho -->
 
         <div class="right-content">
             <div class="interaction-control interactions">
@@ -316,8 +218,7 @@
                     <div class="contact-status">
                         <div class="contact-activity">
                             <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="User Icon" />
-                            <p>Usuario <span><a target="_blank"
-                                        href="https://github.com/Alonso-dev651">Developer</a></span></p>
+                            <p>Usuario <span><a href="#">Developer</a></span></p>
                         </div>
                         <small>1 hour ago</small>
                     </div>

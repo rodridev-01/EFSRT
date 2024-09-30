@@ -4,15 +4,35 @@ $codSoli = $_SESSION['codLogin'];
 include 'formulario_fut/php/db_conexion.php';
 
 // Para jalar los datos y imprimirse
-$sqlSolicitante = "SELECT nombres, apPaterno, apMaterno FROM personal WHERE codLogin = ?";
-$stmtSolicitante = $conexion->prepare($sqlSolicitante);
-$stmtSolicitante->bind_param("i", $codSoli);
-$stmtSolicitante->execute();
-$resultSolicitante = $stmtSolicitante->get_result();
-$rowSolicitante = $resultSolicitante->fetch_assoc();
-$nombres = $rowSolicitante['nombres'];
-$apPaterno = $rowSolicitante['apPaterno'];
-$apMaterno = $rowSolicitante['apMaterno'];
+$sqlSolicitante = "SELECT nombres, apPaterno, apMaterno,correoJP,correoPersonal,tipoDocu, nroDocu, direccion,codEsp, codLogin FROM solicitante";
+$stmtSolicitante = $conexion->query($sqlSolicitante);
+
+// Para jalar los datos y imprimirse
+//$sqlSolicitantes = "SELECT nombres, apPaterno, apMaterno FROM personal WHERE codLogin = ?";
+//$stmtSolicitantes = $conexion->prepare($sqlSolicitantes);
+//$stmtSolicitantes->bind_param("i", $codSoli);
+//$stmtSolicitantes->execute();
+//$resultSolicitantes = $stmtSolicitantes->get_result();
+//$rowSolicitantes = $resultSolicitantes->fetch_assoc();
+//$nombres = $rowSolicitantes['nombres'];
+//$apPaterno = $rowSolicitantes['apPaterno'];
+//$apMaterno = $rowSolicitantes['apMaterno'];
+
+
+// Verificar si se encontraron resultados
+if ($stmtSolicitante->num_rows > 0) {
+    // Almacenar todos los resultados en un array
+    $solicitantes = [];
+    while ($fila = $stmtSolicitante->fetch_assoc()) {
+        $solicitantes[] = $fila; // Agrega cada fila al array
+    }
+} else {
+    echo "No se encontraron resultados";
+}
+
+
+
+
 
 // Para jalar los datos y imprimirse
 //$sqlSolicitante = "SELECT * from fut";
@@ -26,10 +46,12 @@ $apMaterno = $rowSolicitante['apMaterno'];
 //$apMaterno = $rowSolicitante['apMaterno']; 
 
 // Para jalar los datos y mostrar del fut
-$sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito,fecHoraNotificaSolicitante ,estado FROM fut";
+$sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito,estado, codTT, codSoli FROM fut";
 $stmtFut = $conexion->prepare($sqlFut);
 $stmtFut->execute();
 $resultFut = $stmtFut->get_result();
+//$futSolicitante = $resultfut->fetch_assoc();
+//$cod = $futSolicitante['codTT'];
 ?>
 
 <!DOCTYPE html>
@@ -54,7 +76,7 @@ $resultFut = $stmtFut->get_result();
   <nav class="main-menu">
     <div>
       <div class="logo">
-        <img src="Icons_Dash/Logo.ico" alt="logo" />
+        <img src="Icons_Dash/Logo.ico" alt="logo" />    
       </div>
 
       <div class="user-info">
@@ -114,6 +136,7 @@ $resultFut = $stmtFut->get_result();
   
   <?php
                 // Captura la especialidad mediante el codigo de especialidad y lo muestra
+                            
                             $codEsp = $fila['codEsp'];
                             $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
                             $stmtEsp = $conexion->prepare($sqlEsp);
@@ -128,7 +151,7 @@ $resultFut = $stmtFut->get_result();
     $codMod = $fila['codTT'];
     $sqlMod = "select descTT from tipoTramite where codTT = ?";
     $stmtMod = $conexion->prepare($sqlMod);
-    $stmtMod->bind_param("i", $codMod);
+    $stmtMod->bind_param("i", $cod);
     $stmtMod->execute();
     $resultMod = $stmtMod->get_result();
     $filaMod = $resultMod->fetch_assoc();
@@ -150,26 +173,72 @@ $resultFut = $stmtFut->get_result();
         <!-- Para mostrar el fut en el dashboard -->
         <h2>FUTs del Alumno</h2>
         <div class="fut-container">
-          <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
+          <?php 
+  // Función para buscar solicitante por codSoli
+  function buscarSolicitantePorCodSoli($solicitantes, $codSoliS) {
+      foreach ($solicitantes as $solicitante) {
+          if ($solicitante['codLogin'] == $codSoliS) {  
+              return $solicitante;
+          }
+      }
+      return null; // Si no se encuentra ningún solicitante
+  }
+          while ($rowFut = $resultFut->fetch_assoc()) { 
+              // Buscar el solicitante correspondiente al codSoli del FUT
+                $solicitante = buscarSolicitantePorCodSoli($solicitantes, $rowFut['codSoli']);
+                $codEsp = $solicitante['codEsp'];
+                // Consulta para obtener el nombre de la especialidad
+                $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
+                $stmtEsp = $conexion->prepare($sqlEsp);
+                $stmtEsp->bind_param("i", $codEsp);
+                $stmtEsp->execute();
+                $resultEsp = $stmtEsp->get_result();
+                $filaEsp = $resultEsp->fetch_assoc();
+                $nomEsp = $filaEsp['nomEsp'] ?? "No asignada";
+          ?>
             <div class="card fut-card">
-                
-                            
               <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
               <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
               <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
-              <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
-              <p><strong>Especialidad:</strong> <?php echo $nomEsp. "sadas"; ?></p>
+              <p><strong>Descripción:</strong> <?php echo $rowFut['solicito'] ; ?></p>
+              <p><strong>Especialidad:</strong> <?php echo $nomEsp; ?></p>
               <p><strong>Estado:</strong> <?php echo $rowFut['estado'] == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
+              <p><strong>Modulo: </strong> <?php echo $rowFut['codTT'] ; ?></p>
+              <p><strong>Código Solicitante: </strong> <?php echo $rowFut['codSoli'] ; ?></p>
+              
               
               <button onclick="toggleDetalles(this)">Ver detalles</button>
 
                 <div class="detalles" style="display:none;">
-                    <span> 
-                        <p><strong>Nombre de Solicitante:</strong> <?php echo $nombres . ' ' . $apPaterno . ' ' . $apMaterno; ?></p>
-                    </span>
+                    <span>
+              <?php if ($solicitante) { // Si se encontró un solicitante ?>
+                  <p><strong>Nombre de Solicitante:</strong> 
+                      <?php echo $solicitante['nombres'] . " " . $solicitante['apPaterno'] . " " . $solicitante['apMaterno']; ?>
+                  </p>
+                  <p><strong>Correo Institucional:</strong> 
+                      <?php echo $solicitante['correoJP']; ?>
+                  </p>
+                  <p><strong>Correo Personal:</strong> 
+                      <?php echo $solicitante['correoPersonal']; ?>
+                  </p>
+                  <p><strong>Tipo de Documento:</strong> 
+                      <?php echo $solicitante['tipoDocu']; ?>
+                  </p>
+                  <p><strong>Número de Documento:</strong> 
+                      <?php echo $solicitante['nroDocu']; ?>
+                  </p>
+                  <p><strong>Dirección:</strong> 
+                      <?php echo $solicitante['direccion']; ?>
+                  </p>
+                  <p><strong>Especialidad:</strong> 
+                      <?php echo $solicitante['codEsp']; ?>
+                  </p>
+              <?php } else { ?>
+                  <p>No se encontró el solicitante correspondiente.</p>
+              <?php } ?>
+              </span>
                     
-                    <span><p><strong>Fecha Solicitada : </strong> <?php echo $row['fecHoraNotificaSolicitante']; ?></p></span>
-                    <span><p><strong>Modulo : </strong> <?php echo $tramite ; ?></p></span>
+                    
                 </div>
 
             </div>
@@ -255,3 +324,5 @@ $resultFut = $stmtFut->get_result();
 </body>
 
 </html>
+
+

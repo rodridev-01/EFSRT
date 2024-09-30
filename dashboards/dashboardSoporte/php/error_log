@@ -1,5 +1,25 @@
-[23-Sep-2024 23:32:09 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Duplicate entry 'kevin@gmail.com' for key 'correoPersonal' in /home/liveraco/grupo1.live-ra.com/pruebasxamp/personal_1/php/registrar_personal.php:80
+[29-Sep-2024 03:28:55 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Data too long for column 'p_passLogin' at row 1 in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php:67
 Stack trace:
-#0 /home/liveraco/grupo1.live-ra.com/pruebasxamp/personal_1/php/registrar_personal.php(80): mysqli_stmt->execute()
+#0 /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php(67): mysqli_stmt->execute()
 #1 {main}
-  thrown in /home/liveraco/grupo1.live-ra.com/pruebasxamp/personal_1/php/registrar_personal.php on line 80
+  thrown in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php on line 67
+[29-Sep-2024 03:31:00 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Data too long for column 'p_passLogin' at row 1 in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php:67
+Stack trace:
+#0 /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php(67): mysqli_stmt->execute()
+#1 {main}
+  thrown in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php on line 67
+[29-Sep-2024 03:37:38 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Data too long for column 'p_passLogin' at row 1 in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php:67
+Stack trace:
+#0 /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php(67): mysqli_stmt->execute()
+#1 {main}
+  thrown in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php on line 67
+[29-Sep-2024 03:42:21 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Data too long for column 'p_passLogin' at row 1 in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php:67
+Stack trace:
+#0 /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php(67): mysqli_stmt->execute()
+#1 {main}
+  thrown in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php on line 67
+[29-Sep-2024 03:45:11 UTC] PHP Fatal error:  Uncaught mysqli_sql_exception: Data too long for column 'p_passLogin' at row 1 in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php:68
+Stack trace:
+#0 /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php(68): mysqli_stmt->execute()
+#1 {main}
+  thrown in /home/liveraco/grupo3.live-ra.com/personal_3v2/php/registrar_personal.php on line 68
