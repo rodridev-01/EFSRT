@@ -135,7 +135,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
           <i class="bx bx-search"></i>
         </form>
         <div class="user-profile">
-          <h1>User profile</h1>
+          <h1>Perfil de Usuario</h1>
           <div class="user-container">
             <?php
             if ($resultado->num_rows > 0) {
@@ -162,7 +162,6 @@ $apMaterno = $rowSolicitante['apMaterno'];
                   </div>
                 </div>
                 <div class="data-container">
-                  <!-- Posiblemente cambiar a column !-->
                   <div class="data-column">
                     <?php
                     echo "<div><span><strong>Tipo de Documento:</strong></span><p>" . $fila['tipoDocu'] . "</p></div>";
@@ -250,7 +249,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
                 src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png"
                 alt="User Icon" />
               <p>Usuario <span><a target="_blank"
-                    href="https://github.com/Alonso-dev651">Developer</a></span></p>
+                    href="https://github.com/Alonso-dev651/EFSRT">Developer</a></span></p>
             </div>
             <small>1 hour ago</small>
           </div>
