@@ -210,8 +210,8 @@ $apMaterno = $rowSolicitante['apMaterno'];
                     echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
                     echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
                     ?>
-                  </div>;
-            </div>;
+                  </div>
+            </div>
         <?php
                 }
               } else {

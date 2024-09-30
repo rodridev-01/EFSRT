@@ -3,8 +3,8 @@ session_start(); // Iniciar sesión
 
 // Verificar si existe codLogin en la sesión
 if (!isset($_SESSION['codLogin'])) {
-    echo "No se encontró un código de usuario válido. Inicia sesión nuevamente.";
-    exit;
+  echo "No se encontró un código de usuario válido. Inicia sesión nuevamente.";
+  exit;
 }
 
 // Conexión a la base de datos
@@ -18,7 +18,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 
 // Verificar la conexión
 if ($conn->connect_error) {
-    die("Conexión fallida: " . $conn->connect_error);
+  die("Conexión fallida: " . $conn->connect_error);
 }
 
 // Obtener el codLogin de la sesión
@@ -43,10 +43,10 @@ $stmtSolicitante->execute();
 $resultSolicitante = $stmtSolicitante->get_result();
 
 $rowSolicitante = $resultSolicitante->fetch_assoc();
-    $nombres = $rowSolicitante['nombres'];
-    $apPaterno = $rowSolicitante['apPaterno'];
-    $apMaterno = $rowSolicitante['apMaterno'];
-    
+$nombres = $rowSolicitante['nombres'];
+$apPaterno = $rowSolicitante['apPaterno'];
+$apMaterno = $rowSolicitante['apMaterno'];
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +77,7 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
 
       <div class="user-info">
         <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
-        <p><?php echo $nombres.' '.$apPaterno.' '.$apMaterno; ?></p>
+        <p><?php echo $nombres . ' ' . $apPaterno . ' ' . $apMaterno; ?></p>
       </div>
       <ul>
         <li class="nav-item active">
@@ -151,156 +151,51 @@ $rowSolicitante = $resultSolicitante->fetch_assoc();
 
       <div class="left-content">
         <div class="user-profile">
-            <h1>User profile</h1>
-            <div class="user-container">
-                <div class="profile-container">
-                    <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
-                    <?php
-                    if ($resultado->num_rows > 0) {
-                        // Mostrar los datos de la tabla
-                        while ($fila = $resultado->fetch_assoc()) {
-                            echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
-                            echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
-                            echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
-                            echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
-                            echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
-                            echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
-                            echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
-                            echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
-                            echo "<p><strong>Correo JP:</strong> " . $fila['correoJP'] . "</p>";
-                            echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
-                            echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
-                            echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
-                            // Captura la especialidad mediante el codigo de especialidad y lo muestra
-                            $codEsp = $fila['codEsp'];
-                            $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
-                            $stmtEsp = $conn->prepare($sqlEsp);
-                            $stmtEsp->bind_param("i", $codEsp);
-                            $stmtEsp->execute();
-                            $resultEsp = $stmtEsp->get_result();
-                            $filaEsp = $resultEsp->fetch_assoc();
-                            $nomEsp = $filaEsp['nomEsp'];
-                            
-                            echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
-                            echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
-                            echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
-                        }
-                    } else {
-                        echo "<p>No se encontraron datos para este usuario.</p>";
-                    }
-                    // Cerrar la conexión
-                    $stmt->close();
-                    $conn->close();
-                    ?>
-                </div>
-            </div>
-        </div>
-    </div>
-      <!--
-      <div class="upcoming-events">
-        <h1>Tablero</h1>
-        <div class="event-container">
-          <div class="card event-card">
-            <div class="event-header">
-              <img
-                src="https://comers.com.pe/wp-content/uploads/classified-listing/2024/01/servicio-tecnico-pc-san-isidro.png"
-                alt="" />
-              <p>CI 1° Módulo</p>
-              <i class="bx bx-heart like-btn"></i>
-            </div>
-            <div class="event-content">
-              <h2>Mantenimiento de Equipos de Cómputo</h2>
-              <p>Practicas 1er Modulo</p>
-            </div>
-            <div class="event-footer">
-              <p style="background-color: #e48e2c">Pendiente</p>
-              <div class="btn-group">
-                <button>Consultar</button>
-                <div class="share">
-                  <button class="share-btn">
-                    <i class="fa-solid fa-share"></i>
-                  </button>
-                  <ul class="popup">
-                    <li>
-                      <a href="#" style="color: rgb(79, 153, 213)"><i class="bx bxl-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#" style="color: rgb(34, 173, 34)"><i class="bx bxl-whatsapp"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
+          <h1>User profile</h1>
+          <div class="user-container">
+            <div class="profile-container">
+              <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
+              <?php
+              if ($resultado->num_rows > 0) {
+                // Mostrar los datos de la tabla
+                while ($fila = $resultado->fetch_assoc()) {
+                  echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
+                  echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
+                  echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
+                  echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
+                  echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
+                  echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
+                  echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
+                  echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
+                  echo "<p><strong>Correo JP:</strong> " . $fila['correoJP'] . "</p>";
+                  echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
+                  echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
+                  echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
+                  // Captura la especialidad mediante el codigo de especialidad y lo muestra
+                  $codEsp = $fila['codEsp'];
+                  $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
+                  $stmtEsp = $conn->prepare($sqlEsp);
+                  $stmtEsp->bind_param("i", $codEsp);
+                  $stmtEsp->execute();
+                  $resultEsp = $stmtEsp->get_result();
+                  $filaEsp = $resultEsp->fetch_assoc();
+                  $nomEsp = $filaEsp['nomEsp'];
 
-          <div class="card event-card">
-            <div class="event-header">
-              <img
-                src="https://www.microtech.es/hubfs/37228729_m.jpg"
-                alt="" />
-              <p>CI 2° Módulo</p>
-              <i class="bx bx-heart like-btn"></i>
-            </div>
-            <div class="event-content">
-              <h2>Base de Datos</h2>
-              <p>Practicas 2do Módulo</p>
-            </div>
-            <div class="event-footer">
-              <p style="background-color: #4a920f">Completo</p>
-              <div class="btn-group">
-                <button>Consultar</button>
-                <div class="share">
-                  <button class="share-btn">
-                    <i class="fa-solid fa-share"></i>
-                  </button>
-                  <ul class="popup">
-                    <li>
-                      <a href="#" style="color: rgb(79, 153, 213)"><i class="bx bxl-facebook"></i></a>
-                    </li>
-                    <li>
-                      <a href="#" style="color: rgb(34, 173, 34)"><i class="bx bxl-whatsapp"></i></a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
+                  echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
+                  echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
+                  echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
+                }
+              } else {
+                echo "<p>No se encontraron datos para este usuario.</p>";
+              }
+              // Cerrar la conexión
+              $stmt->close();
+              $conn->close();
+              ?>
             </div>
           </div>
         </div>
       </div>
-
-      <div class="reviews">
-        <h1>Evaluación del Docente</h1>
-        <div class="review-container">
-          <div class="card review-card">
-            <h2>Raul Salazar (Prácticas 1° Módulo)</h2>
-            <div class="ratings">
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bx-star"></i>
-              <i class="bx bx-star"></i>
-            </div>
-            <p>
-              El estudiante mostró buenas habilidades, pero su informe requiere más claridad y mejor organización.
-            </p>
-          </div>
-
-          <div class="card review-card">
-            <h2>Daniel Ramos (Prácticas 2° Módulo)</h2>
-            <div class="ratings">
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star"></i>
-              <i class="bx bxs-star-half"></i>
-            </div>
-            <p>
-              El estudiante mostró buenas habilidades; el informe está bien y cumple con los requisitos.
-            </p>
-          </div>
-        </div>
-      </div>
-      !-->
     </div>
 
     <div class="right-content">
