@@ -134,7 +134,7 @@ $resultFut = $stmtFut->get_result();
   </nav>
   
   
-  <?php
+        <?php
                 // Captura la especialidad mediante el codigo de especialidad y lo muestra
                             
                             $codEsp = $fila['codEsp'];
@@ -167,105 +167,105 @@ $resultFut = $stmtFut->get_result();
         </form>
       </div>
 
-      <div class="upcoming-events">
-        <h1>Tablero</h1>
-        
+      <div class="upcoming-events">        
         <!-- Para mostrar el fut en el dashboard -->
-        <div style="display: flex; justify-content: center; align-items: center;">
+            <div style="display: flex; justify-content: center; align-items: center;">
                 <h1>FUTs DEL ALUMNO</h1>
             </div>
-        <div class="fut-container">
-    <?php 
-    // Función para buscar solicitante por codSoli
-    function buscarSolicitantePorCodSoli($solicitantes, $codSoliS) {
-        foreach ($solicitantes as $solicitante) {
-            if ($solicitante['codLogin'] == $codSoliS) {  
-                return $solicitante;
+            <div class="fut-container">
+            <?php 
+            // Función para buscar solicitante por codSoli
+            function buscarSolicitantePorCodSoli($solicitantes, $codSoliS) {
+                foreach ($solicitantes as $solicitante) {
+                    if ($solicitante['codLogin'] == $codSoliS) {  
+                        return $solicitante;
+                    }
+                }
+                return null; // Si no se encuentra ningún solicitante
+            }
+
+            while ($rowFut = $resultFut->fetch_assoc()) { 
+                // Buscar el solicitante correspondiente al codSoli del FUT
+                $solicitante = buscarSolicitantePorCodSoli($solicitantes, $rowFut['codSoli']);
+                $codEsp = $solicitante['codEsp'];
+                // Consulta para obtener el nombre de la especialidad
+                $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
+                $stmtEsp = $conexion->prepare($sqlEsp);
+                $stmtEsp->bind_param("i", $codEsp);
+                $stmtEsp->execute();
+                $resultEsp = $stmtEsp->get_result();
+                $filaEsp = $resultEsp->fetch_assoc();
+                $nomEsp = $filaEsp['nomEsp'] ?? "No asignada";
+            ?>
+                <div class="card fut-card">
+                    <div class="fut-details">
+                        <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
+                        <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
+                        <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
+                        <p><strong>Descripción:</strong> <?php echo $rowFut['solicito']; ?></p>
+                        <p><strong>Especialidad:</strong> <?php echo $nomEsp; ?></p>
+                        <p><strong>Estado:</strong> <?php echo $rowFut['estado'] == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
+                        <p><strong>Módulo:</strong> <?php echo $rowFut['codTT']; ?></p>
+                        <p><strong>Código Solicitante:</strong> <?php echo $rowFut['codSoli']; ?></p>
+                    </div>
+
+                    <div class="fut-form">
+                        <button class="fut-button" onclick="toggleDetalles(this)">Ver detalles</button>
+                    </div>
+
+                    <div class="detalles" style="display:none;">
+                        <div class="detalle-content">
+                            <?php if ($solicitante) { // Si se encontró un solicitante ?>
+                                <p><strong>Nombre de Solicitante:</strong> 
+                                    <?php echo $solicitante['nombres'] . " " . $solicitante['apPaterno'] . " " . $solicitante['apMaterno']; ?>
+                                </p>
+                                <p><strong>Correo Institucional:</strong> 
+                                    <?php echo $solicitante['correoJP']; ?>
+                                </p>
+                                <p><strong>Correo Personal:</strong> 
+                                    <?php echo $solicitante['correoPersonal']; ?>
+                                </p>
+                                <p><strong>Tipo de Documento:</strong> 
+                                    <?php echo $solicitante['tipoDocu']; ?>
+                                </p>
+                                <p><strong>Número de Documento:</strong> 
+                                    <?php echo $solicitante['nroDocu']; ?>
+                                </p>
+                                <p><strong>Dirección:</strong> 
+                                    <?php echo $solicitante['direccion']; ?>
+                                </p>
+                                <p><strong>Especialidad:</strong> 
+                                    <?php echo $solicitante['codEsp']; ?>
+                                </p>
+                            <?php } else { ?>
+                                <p>No se encontró el solicitante correspondiente.</p>
+                            <?php } ?>
+                        </div>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
+
+        <script>
+        function toggleDetalles(button) {
+            // Encuentra el div de detalles (está en el mismo nivel que el botón)
+            var detallesDiv = button.closest('.fut-card').querySelector('.detalles');
+
+            // Si los detalles están ocultos, los mostramos
+            if (detallesDiv.style.display === "none") {
+                detallesDiv.style.display = "block";
+                button.textContent = "Ver menos";  // Cambiar texto a "Ver menos"
+            } else {
+                // Si ya están visibles, los ocultamos
+                detallesDiv.style.display = "none";
+                button.textContent = "Ver detalles";  // Cambiar texto a "Ver detalles"
             }
         }
-        return null; // Si no se encuentra ningún solicitante
-    }
+        </script>
 
-    while ($rowFut = $resultFut->fetch_assoc()) { 
-        // Buscar el solicitante correspondiente al codSoli del FUT
-        $solicitante = buscarSolicitantePorCodSoli($solicitantes, $rowFut['codSoli']);
-        $codEsp = $solicitante['codEsp'];
-        // Consulta para obtener el nombre de la especialidad
-        $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
-        $stmtEsp = $conexion->prepare($sqlEsp);
-        $stmtEsp->bind_param("i", $codEsp);
-        $stmtEsp->execute();
-        $resultEsp = $stmtEsp->get_result();
-        $filaEsp = $resultEsp->fetch_assoc();
-        $nomEsp = $filaEsp['nomEsp'] ?? "No asignada";
-    ?>
-        <div class="card fut-card">
-            <div class="fut-details">
-                <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
-                <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
-                <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
-                <p><strong>Descripción:</strong> <?php echo $rowFut['solicito']; ?></p>
-                <p><strong>Especialidad:</strong> <?php echo $nomEsp; ?></p>
-                <p><strong>Estado:</strong> <?php echo $rowFut['estado'] == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
-                <p><strong>Módulo:</strong> <?php echo $rowFut['codTT']; ?></p>
-                <p><strong>Código Solicitante:</strong> <?php echo $rowFut['codSoli']; ?></p>
-            </div>
 
-            <div class="fut-form">
-                <button class="fut-button" onclick="toggleDetalles(this)">Ver detalles</button>
-            </div>
-
-            <div class="detalles" style="display:none;">
-                <span>
-                    <?php if ($solicitante) { // Si se encontró un solicitante ?>
-                        <p><strong>Nombre de Solicitante:</strong> 
-                            <?php echo $solicitante['nombres'] . " " . $solicitante['apPaterno'] . " " . $solicitante['apMaterno']; ?>
-                        </p>
-                        <p><strong>Correo Institucional:</strong> 
-                            <?php echo $solicitante['correoJP']; ?>
-                        </p>
-                        <p><strong>Correo Personal:</strong> 
-                            <?php echo $solicitante['correoPersonal']; ?>
-                        </p>
-                        <p><strong>Tipo de Documento:</strong> 
-                            <?php echo $solicitante['tipoDocu']; ?>
-                        </p>
-                        <p><strong>Número de Documento:</strong> 
-                            <?php echo $solicitante['nroDocu']; ?>
-                        </p>
-                        <p><strong>Dirección:</strong> 
-                            <?php echo $solicitante['direccion']; ?>
-                        </p>
-                        <p><strong>Especialidad:</strong> 
-                            <?php echo $solicitante['codEsp']; ?>
-                        </p>
-                    <?php } else { ?>
-                        <p>No se encontró el solicitante correspondiente.</p>
-                    <?php } ?>
-                </span>
-            </div>
-        </div>
-    <?php } ?>
-</div>
-
-<script>
-function toggleDetalles(button) {
-    // Encuentra el div de detalles (está en el mismo nivel que el botón)
-    var detallesDiv = button.closest('.fut-card').querySelector('.detalles');
-
-    // Si los detalles están ocultos, los mostramos
-    if (detallesDiv.style.display === "none") {
-        detallesDiv.style.display = "block";
-        button.textContent = "Ver menos";  
-    } else {
-        // Si ya están visibles, los ocultamos
-        detallesDiv.style.display = "none";
-        button.textContent = "Ver detalles";  
-    }
-}
-</script>
-
-    </div>
+      </div>
+      </div>
 
      <div class="right-content">
       <div class="interaction-control interactions">
