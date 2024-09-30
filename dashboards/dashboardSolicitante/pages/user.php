@@ -134,41 +134,25 @@ $apMaterno = $rowSolicitante['apMaterno'];
           <input type="text" placeholder="Buscar..." />
           <i class="bx bx-search"></i>
         </form>
-        <div class="interaction-control-mobile interactions">
-          <i class="fa-regular fa-envelope notified"></i>
-          <i class="fa-regular fa-bell notified"></i>
-          <div class="toggle" onclick="switchTheme()">
-            <div class="mode-icon moon">
-              <i class="bx bxs-moon"></i>
-            </div>
-            <div class="mode-icon sun hidden">
-              <i class="bx bxs-sun"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="left-content">
         <div class="user-profile">
           <h1>User profile</h1>
           <div class="user-container">
-            <div class="profile-container">
-              <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
-            </div>
-            <!--Probando container user!-->
-            <div class="data-container">
-              <?php
-              if ($resultado->num_rows > 0) {
-                // Mostrar los datos de la tabla
-                while ($fila = $resultado->fetch_assoc()) {
-              ?>
-                  <div class="data-row">
+            <?php
+            if ($resultado->num_rows > 0) {
+              // Mostrar los datos de la tabla
+              while ($fila = $resultado->fetch_assoc()) {
+            ?>
+                <div class="profile-container">
+                  <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
+                  <div>
                     <?php
                     echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
                     echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
                     echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
                     ?>
                   </div>
+                </div>
+                <div class="data-container">
                   <div class="data-row">
                     <?php
                     echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
@@ -211,16 +195,16 @@ $apMaterno = $rowSolicitante['apMaterno'];
                     echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
                     ?>
                   </div>
-            </div>
-        <?php
-                }
-              } else {
-                echo "<p>No se encontraron datos para este usuario.</p>";
+                </div>
+            <?php
               }
-              // Cerrar la conexión
-              $stmt->close();
-              $conn->close();
-        ?>
+            } else {
+              echo "<p>No se encontraron datos para este usuario.</p>";
+            }
+            // Cerrar la conexión
+            $stmt->close();
+            $conn->close();
+            ?>
           </div>
         </div>
       </div>
