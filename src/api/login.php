@@ -80,7 +80,7 @@ if (password_verify($password, $hashed_password)) {
             header("Location: ../../dashboards/dashboardCoordinador/home.php");
             exit();
         } else if ($role === "DIRECTIVO") {
-            header("Location: ../../dashboards/dashboardDirectivo/home.php");
+            header("Location: ../../dashboards/dashboarDirectivo/home.php");
             exit();
         } else if ($role === "DOCENTE") {
             header("Location: ../../dashboards/dashboardDocente/home.php");
@@ -97,3 +97,4 @@ if (password_verify($password, $hashed_password)) {
 
 // Cerrar la conexión
 $conn->close();
+
