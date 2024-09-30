@@ -120,7 +120,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
 
     <ul>
       <li class="nav-item">
-        <a href="https://grupo1.live-ra.com/pruebasxamp/">
+        <a href="https://proyecto.live-ra.com">
           <i class="fa fa-right-from-bracket nav-icon"></i>
           <span class="nav-text">Salir</span>
         </a>
