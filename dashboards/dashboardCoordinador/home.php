@@ -76,7 +76,7 @@ $resultFut = $stmtFut->get_result();
         <li class="nav-item">
           <a href="./Estado_fut/estado.php">
             <i class="fa-solid fa-chart-simple nav-icon"></i>
-            <span class="nav-text">Estado de FUTS</span>
+            <span class="nav-text">Estado</span>
           </a>
         </li>
 

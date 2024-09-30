@@ -21,17 +21,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_param("issi", $docente, $descripcion, $nroFut, $anioFut);
 
         if ($stmt->execute()) {
-            echo "<script>alert('FUT asignado exitosamente al docente'); window.location.href = 'https://grupo1.live-ra.com/pruebasxamp/dashboardcoordinador/home.php';</script>";
+            echo "<script>alert('FUT asignado exitosamente al docente'); window.location.href = '../home.php';</script>";
         } else {
             echo "Error al asignar el FUT al docente: " . $stmt->error;
         }
-
         $stmt->close();
     } else {
-        echo "Error en la preparaci��n de la consulta: " . $conexion->error;
+        echo "Error en la preparación de la consulta: " . $conexion->error;
     }
 } else {
-    echo "Error: Solicitud no v��lida.";
+    echo "Error: Solicitud no valida.";
 }
 
 $conexion->close();
