@@ -112,7 +112,6 @@ $estado = $_POST['estado'] ?? '';
               <p><strong>Estado:</strong> <?php echo $estado == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
           </div>
     </div>
-    </div>
     <div class="right-content">
       <div class="interaction-control interactions">
         <i class="fa-regular fa-envelope notified"></i>
