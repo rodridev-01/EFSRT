@@ -184,7 +184,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
                     echo "<div><span><strong>Código Modular:</strong></span><p> " . $fila['codModular'] . "</p></div>";
                     echo "<div><span><strong>Correo Personal:</strong></span><p> " . $fila['correoPersonal'] . "</p></div>";
                     echo "<div><span><strong>Código de Distrito:</strong></span><p> " . $fila['codDis'] . "</p></div>";
-                    echo "<div><span><strong>Año de Egreso:</strong></span><p> " . $fila['apMaterno'] . "</p></div>";
+                    echo "<div><span><strong>Año de Egreso:</strong></span><p> " . $fila['anioEgreso'] . "</p></div>";
                     ?>
                   </div>
                 </div>
