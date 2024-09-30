@@ -112,15 +112,14 @@ if ($result->num_rows > 0) {
             
             <hr>
                 <div class="fut-container">
-                <!-- Mostrar las tarjetas con datos desde la base de datos -->
                 <form action="" class="card-container">
                     <?php
                     include "php/db_conexion.php";
                     $sql = $conexion->query("SELECT * FROM personal");
                     while ($datos = $sql->fetch_object()) {
                     ?>
-                    <div class="fut-card"> <!-- Usando la clase fut-card para las tarjetas -->
-                    <div class="fut-details"> <!-- Clase para los detalles de la tarjeta -->
+                    <div class="fut-card"> 
+                    <div class="fut-details">
                         <h3><?= $datos->nombres ?> <?= $datos->apPaterno ?> <?= $datos->apMaterno ?></h3>
                         <p><strong>Nro Doc:</strong> <?= $datos->nroDocu ?></p>
                         <p><strong>Celular:</strong> <?= $datos->celular ?></p>
@@ -129,7 +128,7 @@ if ($result->num_rows > 0) {
                         <p><strong>Estado:</strong> <?= $datos->estado ?></p>
                         <p><strong>Tipo Personal:</strong> <?= $datos->tipoPer ?></p>
                     </div>
-                    <div class="fut-form"> <!-- Clase para alinear el botón -->
+                    <div class="fut-form"> 
                         <a href="modificar_personal.php?id=<?= $datos->codLogin ?>" class="fut-button">
                         <i class="fa-solid fa-user-pen"></i> Editar
                         </a>
