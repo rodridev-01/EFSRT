@@ -109,15 +109,18 @@ if ($result->num_rows > 0) {
             <div class="d-flex justify-content-center align-items-center">
                 <h1>REGISTROS DEL PERSONAL</h1>
             </div>
+            
             <hr>
-            <form action="" class="card-container">
-                <?php
+                <div class="fut-container">
+                <!-- Mostrar las tarjetas con datos desde la base de datos -->
+                <form action="" class="card-container">
+                    <?php
                     include "php/db_conexion.php";
                     $sql = $conexion->query("SELECT * FROM personal");
                     while ($datos = $sql->fetch_object()) {
-                ?>
-                <div class="card">
-                    <div class="card-content">
+                    ?>
+                    <div class="fut-card"> <!-- Usando la clase fut-card para las tarjetas -->
+                    <div class="fut-details"> <!-- Clase para los detalles de la tarjeta -->
                         <h3><?= $datos->nombres ?> <?= $datos->apPaterno ?> <?= $datos->apMaterno ?></h3>
                         <p><strong>Nro Doc:</strong> <?= $datos->nroDocu ?></p>
                         <p><strong>Celular:</strong> <?= $datos->celular ?></p>
@@ -126,20 +129,24 @@ if ($result->num_rows > 0) {
                         <p><strong>Estado:</strong> <?= $datos->estado ?></p>
                         <p><strong>Tipo Personal:</strong> <?= $datos->tipoPer ?></p>
                     </div>
-                    <div class="card-actions">
-                        <a href="modificar_personal.php?id=<?= $datos->codLogin ?>" class="btn btn-warning">
-                            <i class="fa-solid fa-user-pen"></i> Editar
+                    <div class="fut-form"> <!-- Clase para alinear el botón -->
+                        <a href="modificar_personal.php?id=<?= $datos->codLogin ?>" class="fut-button">
+                        <i class="fa-solid fa-user-pen"></i> Editar
                         </a>
                     </div>
-                </div>
-                <?php
+                    </div>
+                    <?php
                     }
-                ?>
-            </form>
+                    ?>
+                </form>
 
-            <a href="registrar_personal.php" class="btn btn-success">
+            <!-- Botón para registrar nuevo personal -->
+            <div class="fut-navigation">
+                <a href="registrar_personal.php" class="fut-nav-button">
                 <i class="fa-solid fa-address-card"></i> Registrar Personal
-            </a>
+                </a>
+            </div>
+            </div>
 
         </div>
 
