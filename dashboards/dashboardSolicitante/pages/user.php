@@ -162,17 +162,17 @@ $apMaterno = $rowSolicitante['apMaterno'];
                   </div>
                   <div class="data-row">
                     <?php
-                    echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
-                    echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
-                    echo "<p><strong>Correo JP:</strong> " . $fila['correoJP'] . "</p>";
-                    echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
+                    echo "<div><span><strong>Teléfono:</strong></span><p> " . $fila['telf'] . "</p></div>";
+                    echo "<div><span><strong>Celular:</strong></span><p> " . $fila['celular'] . "</p></div>";
+                    echo "<div><span><strong>Correo JP:</strong></span><p> " . $fila['correoJP'] . "</p></div>";
+                    echo "<div><span><strong>Correo Personal:</strong></span><p> " . $fila['correoPersonal'] . "</p></div>";
                     ?>
                   </div>
                   <div class="data-row">
                     <?php
-                    echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
-                    echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
-                    echo "<p><strong>Código de Especialidad:</strong> " . $fila['codEsp'] . "</p>";
+                    echo "<div><span><strong>Dirección:</strong></span><p> " . $fila['direccion'] . "</p></div>";
+                    echo "<div><span><strong>Código de Distrito:</strong></span><p> " . $fila['codDis'] . "</p></div>";
+                    echo "<div><span><strong>Código de Especialidad:</strong></span><p> " . $fila['codEsp'] . "</p></div>";
                     ?>
                   </div>
                   <?php
@@ -190,9 +190,9 @@ $apMaterno = $rowSolicitante['apMaterno'];
                   ?>
                   <div class="data-row">
                     <?php
-                    echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
-                    echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
-                    echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
+                    echo "<div><span><strong>Especialidad:</strong></span><p> " . $nomEsp . "</p></div>";
+                    echo "<div><span><strong>Año de Ingreso:</strong></span><p> " . $fila['anioIngreso'] . "</p></div>";
+                    echo "<div><span><strong>Año de Egreso:</strong></span><p> " . $fila['anioEgreso'] . "</p></div>";
                     ?>
                   </div>
                 </div>
