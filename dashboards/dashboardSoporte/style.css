@@ -1003,61 +1003,66 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-/* Estilo para el contenedor principal del título */
-.d-flex {
+/* Estilos para el contenedor de tarjetas */
+.card-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 20px;
   margin-top: 20px;
 }
 
-/* Estilo para el formulario */
-form.col-5 {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px;
+/* Estilos para las tarjetas */
+.card {
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
   border-radius: 8px;
-}
-
-/* Estilos para la tabla */
-.table {
+  padding: 15px;
   width: 100%;
-  border-collapse: collapse;
+  max-width: 350px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
-.table-striped tbody tr:nth-child(odd) {
-  background-color: #f2f2f2;
+/* Estilos al hacer hover en la tarjeta */
+.card:hover {
+  transform: translateY(-5px);
 }
 
-.table th, .table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+/* Contenido de la tarjeta */
+.card-content {
+  margin-bottom: 10px;
 }
 
-/* Estilo para los encabezados de la tabla */
-.table-dark {
-  background-color: #333;
-  color: white;
+/* Estilo del título (nombre completo) */
+.card h3 {
+  margin: 0 0 10px;
+  font-size: 1.2em;
+  color: #333;
 }
 
-.table th {
-  font-weight: bold;
+/* Estilos para el texto dentro de la tarjeta */
+.card p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* Botones de acción */
+.card-actions {
+  margin-top: 10px;
+  text-align: right;
 }
 
 /* Estilo para los botones */
 .btn {
-  display: inline-block;
   padding: 8px 12px;
   font-size: 14px;
-  text-align: center;
-  cursor: pointer;
   border: none;
   border-radius: 4px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
 }
 
 .btn-warning {
@@ -1073,29 +1078,30 @@ form.col-5 {
   background-color: #5cb85c;
   color: white;
   margin-top: 20px;
-  display: inline-block;
 }
 
 .btn-success:hover {
   background-color: #4cae4c;
 }
 
+/* Iconos dentro de los botones */
 .fa-user-pen, .fa-address-card {
   margin-right: 5px;
 }
 
 /* Responsividad */
 @media (max-width: 768px) {
-  form.col-5 {
-      padding: 5px;
+  .card-container {
+      flex-direction: column;
+      align-items: center;
   }
-
-  .table th, .table td {
-      padding: 8px 10px;
+  
+  .card {
+      width: 100%;
+      max-width: none;
   }
 
   .btn {
-      padding: 6px 10px;
       font-size: 12px;
   }
 }
