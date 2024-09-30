@@ -146,9 +146,9 @@ $apMaterno = $rowSolicitante['apMaterno'];
                   <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
                   <div>
                     <?php
-                    echo "<div><span><strong>Nombres:</strong></span><p>" . $fila['nombres'] . "</p></div>";
-                    echo "<div><span><strong>Apellido Paterno:</strong></span><p>" . $fila['apPaterno'] . "</p></div>";
-                    echo "<div><span><strong>Apellido Materno:</strong></span><p>" . $fila['apMaterno'] . "</p></div>";
+                    echo "<p><strong>Nombres:</strong>" . $fila['nombres'] . "</p>";
+                    echo "<p><strong>Apellido Paterno:</strong>" . $fila['apPaterno'] . "</p>";
+                    echo "<p><strong>Apellido Materno:</strong>" . $fila['apMaterno'] . "</p>";
                     ?>
                   </div>
                 </div>
