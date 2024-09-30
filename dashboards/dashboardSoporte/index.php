@@ -106,7 +106,7 @@ if ($result->num_rows > 0) {
     <section class="content">
         <div class="left-content">
             <!-- Inicio de la vista de los registros -->
-            <div class="d-flex justify-content-center align-items-center">
+            <div style="display: flex; justify-content: center; align-items: center;">
                 <h1>REGISTROS DEL PERSONAL</h1>
             </div>
             

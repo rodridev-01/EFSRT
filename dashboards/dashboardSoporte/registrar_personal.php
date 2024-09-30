@@ -122,6 +122,9 @@ if ($result->num_rows > 0) {
                 LOGIN Y SE LE SUMA 1, YA QUE NO Esta
                 COMO CAMPO AUTO INCREMENT. (GARANTIZA SER ÚNICO)
             </pre> -->
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <h1>REGISTRAR NUEVO PERSONAL</h1>
+            </div>
 
             <form id="personalForm" method="POST" action="php/registrar_personal.php">
                 <label for="tipoPersonal">Tipo de Personal</label>
