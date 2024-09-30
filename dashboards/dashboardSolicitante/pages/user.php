@@ -57,7 +57,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="../styles/user_default.css">
+  <link rel="stylesheet" href="../styles/default_user.css">
   <link href="../../../src/images/Logo.ico" rel="icon">
   <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -141,6 +141,15 @@ $apMaterno = $rowSolicitante['apMaterno'];
             if ($resultado->num_rows > 0) {
               // Mostrar los datos de la tabla
               while ($fila = $resultado->fetch_assoc()) {
+                // Captura la especialidad mediante el codigo de especialidad y lo muestra
+                $codEsp = $fila['codEsp'];
+                $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
+                $stmtEsp = $conn->prepare($sqlEsp);
+                $stmtEsp->bind_param("i", $codEsp);
+                $stmtEsp->execute();
+                $resultEsp = $stmtEsp->get_result();
+                $filaEsp = $resultEsp->fetch_assoc();
+                $nomEsp = $filaEsp['nomEsp'];
             ?>
                 <div class="profile-container">
                   <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
@@ -153,45 +162,29 @@ $apMaterno = $rowSolicitante['apMaterno'];
                   </div>
                 </div>
                 <div class="data-container">
-                  <div class="data-row">
+                  <!-- Posiblemente cambiar a column !-->
+                  <div class="data-column">
                     <?php
                     echo "<div><span><strong>Tipo de Documento:</strong></span><p>" . $fila['tipoDocu'] . "</p></div>";
-                    echo "<div><span><strong>Número de Documento:</strong></span><p>" . $fila['nroDocu'] . "</p></div>";
-                    echo "<div><span><strong>Código Modular:</strong></span><p>" . $fila['codModular'] . "</p></div>";
-                    ?>
-                  </div>
-                  <div class="data-row">
-                    <?php
                     echo "<div><span><strong>Teléfono:</strong></span><p> " . $fila['telf'] . "</p></div>";
                     echo "<div><span><strong>Celular:</strong></span><p> " . $fila['celular'] . "</p></div>";
-                    echo "<div><span><strong>Correo JP:</strong></span><p> " . $fila['correoJP'] . "</p></div>";
-                    echo "<div><span><strong>Correo Personal:</strong></span><p> " . $fila['correoPersonal'] . "</p></div>";
-                    ?>
-                  </div>
-                  <div class="data-row">
-                    <?php
-                    echo "<div><span><strong>Dirección:</strong></span><p> " . $fila['direccion'] . "</p></div>";
-                    echo "<div><span><strong>Código de Distrito:</strong></span><p> " . $fila['codDis'] . "</p></div>";
+                    echo "<div><span><strong>Especialidad:</strong></span><p> " . $nomEsp . "</p></div>";
                     echo "<div><span><strong>Código de Especialidad:</strong></span><p> " . $fila['codEsp'] . "</p></div>";
                     ?>
                   </div>
-                  <?php
-
-                  // Captura la especialidad mediante el codigo de especialidad y lo muestra
-                  $codEsp = $fila['codEsp'];
-                  $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
-                  $stmtEsp = $conn->prepare($sqlEsp);
-                  $stmtEsp->bind_param("i", $codEsp);
-                  $stmtEsp->execute();
-                  $resultEsp = $stmtEsp->get_result();
-                  $filaEsp = $resultEsp->fetch_assoc();
-                  $nomEsp = $filaEsp['nomEsp'];
-
-                  ?>
-                  <div class="data-row">
+                  <div class="data-column">
                     <?php
-                    echo "<div><span><strong>Especialidad:</strong></span><p> " . $nomEsp . "</p></div>";
+                    echo "<div><span><strong>Número de Documento:</strong></span><p>" . $fila['nroDocu'] . "</p></div>";
+                    echo "<div><span><strong>Correo JP:</strong></span><p> " . $fila['correoJP'] . "</p></div>";
+                    echo "<div><span><strong>Dirección:</strong></span><p> " . $fila['direccion'] . "</p></div>";
                     echo "<div><span><strong>Año de Ingreso:</strong></span><p> " . $fila['anioIngreso'] . "</p></div>";
+                    ?>
+                  </div>
+                  <div class="data-column">
+                    <?php
+                    echo "<div><span><strong>Código Modular:</strong></span><p>" . $fila['codModular'] . "</p></div>";
+                    echo "<div><span><strong>Correo Personal:</strong></span><p> " . $fila['correoPersonal'] . "</p></div>";
+                    echo "<div><span><strong>Código de Distrito:</strong></span><p> " . $fila['codDis'] . "</p></div>";
                     echo "<div><span><strong>Año de Egreso:</strong></span><p> " . $fila['anioEgreso'] . "</p></div>";
                     ?>
                   </div>
