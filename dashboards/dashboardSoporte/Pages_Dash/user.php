@@ -1,38 +1,41 @@
 <?php
-include ("../php/db_conexion.php");
+session_start(); // Asegúrate de que las sesiones estén habilitadas
 
-// Usar el valor fijo 74
+include("db_conexion.php");
+
+// Usar un código fijo para esta consulta
 $codLoginFijo = 74;
 
-// Consultar los datos del registro para el codLogin fijo
-$sql = "SELECT * FROM personal WHERE codLogin = ?";
-$stmt = $conexion->prepare($sql);
-$stmt->bind_param("i", $codLoginFijo);  
-$stmt->execute();
-$result = $stmt->get_result();
+try {
+    // Preparar la consulta
+    $query = $pdo->prepare("SELECT codLogin, nombre, apellidos, email FROM usuarios WHERE codLogin = :codLogin");
+    $query->bindParam(':codLogin', $codLoginFijo, PDO::PARAM_INT); // Usar un parámetro nombrado
+    $query->execute();
 
-if ($result->num_rows > 0) {
-    $personal = $result->fetch_assoc();
-
-    $apellidoPaterno = $personal['apPaterno'];
-    $apellidoMaterno = $personal['apMaterno'];
-    $nombresPersonal = $personal['nombres'];
-    $tipoDocumento = $personal['tipoDocu'];
-    $nroDocumento = $personal['nroDocu'];
-    $telefono = $personal['telf'];
-    $celular = $personal['celular'];
-    $correoJP = $personal['correoJP'];
-    $correoPersonal = $personal['correoPersonal'];
-    $direccion = $personal['direccion'];
-    $codigoPlaza = $personal['codigoPlaza'];
-    $estadoPersonal = $personal['estado'];
-    $tipoPersonal = $personal['tipoPer'];
-} else {
-    echo "No se encontraron datos para el codLogin proporcionado.";
+    // Verificar si se encontraron resultados
+    if ($query->rowCount() > 0) {
+        // Obtener los datos
+        $userData = $query->fetch(PDO::FETCH_ASSOC);
+        
+        // Almacenar datos en variables
+        $codLogin = htmlspecialchars($userData['codLogin']);
+        $nombre = htmlspecialchars($userData['nombre']);
+        $apellidos = htmlspecialchars($userData['apellidos']);
+        $email = htmlspecialchars($userData['email']);
+    } else {
+        throw new Exception("No se encontraron datos para el usuario.");
+    }
+} catch (PDOException $e) {
+    // Manejo de errores de base de datos
+    echo "Error en la conexión: " . htmlspecialchars($e->getMessage());
+    exit();
+} catch (Exception $e) {
+    // Manejo de errores generales
+    echo "Error: " . htmlspecialchars($e->getMessage());
+    exit();
 }
-
-$conexion->close();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
