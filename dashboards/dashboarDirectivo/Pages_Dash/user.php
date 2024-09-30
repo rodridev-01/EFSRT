@@ -135,79 +135,58 @@ $apMaterno = $rowSolicitante['apMaterno'];
           <input type="text" placeholder="Buscar..." />
           <i class="bx bx-search"></i>
         </form>
-        <div class="interaction-control-mobile interactions">
-          <i class="fa-regular fa-envelope notified"></i>
-          <i class="fa-regular fa-bell notified"></i>
-          <div class="toggle" onclick="switchTheme()">
-            <div class="mode-icon moon">
-              <i class="bx bxs-moon"></i>
-            </div>
-            <div class="mode-icon sun hidden">
-              <i class="bx bxs-sun"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="left-content">
-        <div class="search-and-check">
-          <form class="search-box">
-            <input type="text" placeholder="Buscar..." />
-            <i class="bx bx-search"></i>
-          </form>
-          <div class="user-profile">
-            <h1>Perfil de Usuario</h1>
-            <div class="user-container">
-              <?php
-              if ($resultado->num_rows > 0) {
-                // Mostrar los datos de la tabla
-                while ($fila = $resultado->fetch_assoc()) {
-              ?>
-                  <div class="profile-container">
-                    <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
-                    <div>
-                      <?php
-                      echo "<p><strong>Tipo de Personal:</strong> " . $fila['tipoPer'] . "</p>";
-                      echo "<p><strong>Nombres:</strong>" . $fila['nombres'] . "</p>";
-                      echo "<p><strong>Apellido Paterno:</strong>" . $fila['apPaterno'] . "</p>";
-                      echo "<p><strong>Apellido Materno:</strong>" . $fila['apMaterno'] . "</p>";
-                      ?>
-                    </div>
+        <div class="user-profile">
+          <h1>Perfil de Usuario</h1>
+          <div class="user-container">
+            <?php
+            if ($resultado->num_rows > 0) {
+              // Mostrar los datos de la tabla
+              while ($fila = $resultado->fetch_assoc()) {
+            ?>
+                <div class="profile-container">
+                  <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
+                  <div>
+                    <?php
+                    echo "<p><strong>Tipo de Personal:</strong> " . $fila['tipoPer'] . "</p>";
+                    echo "<p><strong>Nombres:</strong>" . $fila['nombres'] . "</p>";
+                    echo "<p><strong>Apellido Paterno:</strong>" . $fila['apPaterno'] . "</p>";
+                    echo "<p><strong>Apellido Materno:</strong>" . $fila['apMaterno'] . "</p>";
+                    ?>
                   </div>
-                  <div class="data-container">
-                    <div class="data-column">
-                      <?php
-                      echo "<div><span><strong>Tipo de Documento:</strong></span><p>" . $fila['tipoDocu'] . "</p></div>";
-                      echo "<div><span><strong>Teléfono:</strong></span><p> " . $fila['telf'] . "</p></div>";
-                      echo "<div><span><strong>Celular:</strong></span><p> " . $fila['celular'] . "</p></div>";
-                      echo "<div><span><strong>Código de Plaza:</strong></span><p> " . $fila['codigoPlaza'] . "</p></div>";
-                      ?>
-                    </div>
-                    <div class="data-column">
-                      <?php
-                      echo "<div><span><strong>Número de Documento:</strong></span><p>" . $fila['nroDocu'] . "</p></div>";
-                      echo "<div><span><strong>Correo JP:</strong></span><p> " . $fila['correoJP'] . "</p></div>";
-                      echo "<div><span><strong>Dirección:</strong></span><p> " . $fila['direccion'] . "</p></div>";
-                      ?>
-                    </div>
-                    <div class="data-column">
-                      <?php
-                      echo "<div><span><strong>Estado:</strong></span><p>" . $fila['estado'] . "</p></div>";
-                      echo "<div><span><strong>Correo Personal:</strong></span><p> " . $fila['correoPersonal'] . "</p></div>";
-                      echo "<div><span><strong>Código de Distrito:</strong></span><p> " . $fila['codDis'] . "</p></div>";
-                      ?>
-                    </div>
+                </div>
+                <div class="data-container">
+                  <div class="data-column">
+                    <?php
+                    echo "<div><span><strong>Tipo de Documento:</strong></span><p>" . $fila['tipoDocu'] . "</p></div>";
+                    echo "<div><span><strong>Teléfono:</strong></span><p> " . $fila['telf'] . "</p></div>";
+                    echo "<div><span><strong>Celular:</strong></span><p> " . $fila['celular'] . "</p></div>";
+                    echo "<div><span><strong>Código de Plaza:</strong></span><p> " . $fila['codigoPlaza'] . "</p></div>";
+                    ?>
                   </div>
-              <?php
-                }
-              } else {
-                echo "<p>No se encontraron datos para este usuario.</p>";
+                  <div class="data-column">
+                    <?php
+                    echo "<div><span><strong>Número de Documento:</strong></span><p>" . $fila['nroDocu'] . "</p></div>";
+                    echo "<div><span><strong>Correo JP:</strong></span><p> " . $fila['correoJP'] . "</p></div>";
+                    echo "<div><span><strong>Dirección:</strong></span><p> " . $fila['direccion'] . "</p></div>";
+                    ?>
+                  </div>
+                  <div class="data-column">
+                    <?php
+                    echo "<div><span><strong>Estado:</strong></span><p>" . $fila['estado'] . "</p></div>";
+                    echo "<div><span><strong>Correo Personal:</strong></span><p> " . $fila['correoPersonal'] . "</p></div>";
+                    echo "<div><span><strong>Código de Distrito:</strong></span><p> " . $fila['codDis'] . "</p></div>";
+                    ?>
+                  </div>
+                </div>
+            <?php
               }
-              // Cerrar la conexión
-              $stmt->close();
-              $conn->close();
-              ?>
-            </div>
+            } else {
+              echo "<p>No se encontraron datos para este usuario.</p>";
+            }
+            // Cerrar la conexión
+            $stmt->close();
+            $conn->close();
+            ?>
           </div>
         </div>
       </div>
