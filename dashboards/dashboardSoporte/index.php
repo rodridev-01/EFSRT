@@ -105,62 +105,41 @@ if ($result->num_rows > 0) {
 
     <section class="content">
         <div class="left-content">
-<!-- Inicio de la vista de los registros -->
-<div class="d-flex justify-content-center align-items-center">
-    <h1>REGISTROS DEL PERSONAL</h1>
-</div>
-<hr>
-<form action="" class="col-12">
-    <table class="table table-striped">
-        <thead class="table-dark">
-            <tr>
-                <th scope="col">Apellido Paterno</th>
-                <th scope="col">Apellido Materno</th>
-                <th scope="col">Nombres</th>
-                <th scope="col">Nro Doc</th>
-                <th scope="col">Celular</th>
-                <th scope="col">Correo Institucional</th>
-                <th scope="col">Correo Personal</th>
-                <th scope="col">Estado</th>
-                <th scope="col">Tipo Personal</th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
+            <!-- Inicio de la vista de los registros -->
+            <div class="d-flex justify-content-center align-items-center">
+                <h1>REGISTROS DEL PERSONAL</h1>
+            </div>
+            <hr>
+            <form action="" class="card-container">
+                <?php
+                    include "php/db_conexion.php";
+                    $sql = $conexion->query("SELECT * FROM personal");
+                    while ($datos = $sql->fetch_object()) {
+                ?>
+                <div class="card">
+                    <div class="card-content">
+                        <h3><?= $datos->nombres ?> <?= $datos->apPaterno ?> <?= $datos->apMaterno ?></h3>
+                        <p><strong>Nro Doc:</strong> <?= $datos->nroDocu ?></p>
+                        <p><strong>Celular:</strong> <?= $datos->celular ?></p>
+                        <p><strong>Correo Institucional:</strong> <?= $datos->correoJP ?></p>
+                        <p><strong>Correo Personal:</strong> <?= $datos->correoPersonal ?></p>
+                        <p><strong>Estado:</strong> <?= $datos->estado ?></p>
+                        <p><strong>Tipo Personal:</strong> <?= $datos->tipoPer ?></p>
+                    </div>
+                    <div class="card-actions">
+                        <a href="modificar_personal.php?id=<?= $datos->codLogin ?>" class="btn btn-warning">
+                            <i class="fa-solid fa-user-pen"></i> Editar
+                        </a>
+                    </div>
+                </div>
+                <?php
+                    }
+                ?>
+            </form>
 
-            <?php
-                include "php/db_conexion.php";
-                $sql = $conexion->query("SELECT * FROM personal");
-                while ($datos = $sql->fetch_object()) {
-            ?>
-
-            <tr>
-                <td data-label="Apellido Paterno"><?= $datos->apPaterno ?></td>
-                <td data-label="Apellido Materno"><?= $datos->apMaterno ?></td>
-                <td data-label="Nombres"><?= $datos->nombres ?></td>
-                <td data-label="Nro Doc"><?= $datos->nroDocu ?></td>
-                <td data-label="Celular"><?= $datos->celular ?></td>
-                <td data-label="Correo Institucional"><?= $datos->correoJP ?></td>
-                <td data-label="Correo Personal"><?= $datos->correoPersonal ?></td>
-                <td data-label="Estado"><?= $datos->estado ?></td>
-                <td data-label="Tipo Personal"><?= $datos->tipoPer ?></td>
-                <td>
-                    <a href="modificar_personal.php?id=<?= $datos->codLogin ?>" class="btn btn-warning">
-                        <i class="fa-solid fa-user-pen"></i> Editar
-                    </a>
-                </td>
-            </tr>
-
-            <?php
-                }
-            ?>
-        </tbody>
-    </table>
-</form>
-
-<a href="registrar_personal.php" class="btn btn-success">
-    <i class="fa-solid fa-address-card"></i> Registrar Personal
-</a>
+            <a href="registrar_personal.php" class="btn btn-success">
+                <i class="fa-solid fa-address-card"></i> Registrar Personal
+            </a>
 
         </div>
 
