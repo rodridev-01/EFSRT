@@ -59,7 +59,7 @@ $estado = $_POST['estado'] ?? '';
         </li>
 
         <li class="nav-item">
-          <a href="../formulario_fut">
+          <a href="../formulario_fut/formularioFUT.php">
             <i class="fa fa-arrow-trend-up nav-icon"></i>
             <span class="nav-text">Tramite</span>
           </a>
@@ -112,7 +112,7 @@ $estado = $_POST['estado'] ?? '';
               <p><strong>Estado:</strong> <?php echo $estado == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
           </div>
     </div>
-
+    </div>
     <div class="right-content">
       <div class="interaction-control interactions">
         <i class="fa-regular fa-envelope notified"></i>
