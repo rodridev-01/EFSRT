@@ -31,9 +31,7 @@ $stmtSolicitante->bind_param("i", $codSoli);
 $stmtSolicitante->execute();
 $resultSolicitante = $stmtSolicitante->get_result();
 $rowSolicitante = $resultSolicitante->fetch_assoc();
-$nombres = $rowSolicitante['nombres'];
-$apPaterno = $rowSolicitante['apPaterno'];
-$apMaterno = $rowSolicitante['apMaterno'];
+
 
 
 $query = "SELECT apPaterno, apMaterno, nombres, tipoDocu, nroDocu, codModular, telf, celular, correoJP, correoPersonal, direccion, anioIngreso, anioEgreso FROM solicitante WHERE codLogin = ?";
