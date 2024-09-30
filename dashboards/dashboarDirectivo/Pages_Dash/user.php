@@ -238,7 +238,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
               <img
                 src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png"
                 alt="User Icon" />
-              <p>Usuario <span><a
+              <p>Usuario <span><a target="_blank"
                     href="https://github.com/Alonso-dev651/EFSRT">Developer</a></span></p>
             </div>
             <small>1 hour ago</small>

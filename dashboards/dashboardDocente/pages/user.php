@@ -57,7 +57,7 @@ $apMaterno = $rowSolicitante['apMaterno'];
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  <link rel="stylesheet" href="../styles/user.css">
+  <link rel="stylesheet" href="../styles/default_user.css">
   <link href="../../../src/images/Logo.ico" rel="icon">
   <script defer src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
   <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -135,64 +135,68 @@ $apMaterno = $rowSolicitante['apMaterno'];
           <input type="text" placeholder="Buscar..." />
           <i class="bx bx-search"></i>
         </form>
-        <div class="interaction-control-mobile interactions">
-          <i class="fa-regular fa-envelope notified"></i>
-          <i class="fa-regular fa-bell notified"></i>
-          <div class="toggle" onclick="switchTheme()">
-            <div class="mode-icon moon">
-              <i class="bx bxs-moon"></i>
-            </div>
-            <div class="mode-icon sun hidden">
-              <i class="bx bxs-sun"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="left-content">
         <div class="user-profile">
-          <h1>User profile</h1>
+          <h1>Perfil de Usuario</h1>
           <div class="user-container">
-            <div class="profile-container">
-              <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
-              <?php
-              if ($resultado->num_rows > 0) {
-                // Mostrar los datos de la tabla
-                while ($fila = $resultado->fetch_assoc()) {
-                  echo "<p><strong>Nombres:</strong> " . $fila['nombres'] . "</p>";
-                  echo "<p><strong>Apellido Paterno:</strong> " . $fila['apPaterno'] . "</p>";
-                  echo "<p><strong>Apellido Materno:</strong> " . $fila['apMaterno'] . "</p>";
-                  echo "<p><strong>Tipo de Documento:</strong> " . $fila['tipoDocu'] . "</p>";
-                  echo "<p><strong>Número de Documento:</strong> " . $fila['nroDocu'] . "</p>";
-                  echo "<p><strong>Código Modular:</strong> " . $fila['codModular'] . "</p>";
-                  echo "<p><strong>Teléfono:</strong> " . $fila['telf'] . "</p>";
-                  echo "<p><strong>Celular:</strong> " . $fila['celular'] . "</p>";
-                  echo "<p><strong>Correo JP:</strong> " . $fila['correoJP'] . "</p>";
-                  echo "<p><strong>Correo Personal:</strong> " . $fila['correoPersonal'] . "</p>";
-                  echo "<p><strong>Dirección:</strong> " . $fila['direccion'] . "</p>";
-                  echo "<p><strong>Código de Distrito:</strong> " . $fila['codDis'] . "</p>";
-                  // Captura la especialidad mediante el codigo de especialidad y lo muestra
-                  $codEsp = $fila['codEsp'];
-                  $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
-                  $stmtEsp = $conn->prepare($sqlEsp);
-                  $stmtEsp->bind_param("i", $codEsp);
-                  $stmtEsp->execute();
-                  $resultEsp = $stmtEsp->get_result();
-                  $filaEsp = $resultEsp->fetch_assoc();
-                  $nomEsp = $filaEsp['nomEsp'];
-
-                  echo "<p><strong>Especialidad:</strong> " . $nomEsp . "</p>";
-                  echo "<p><strong>Año de Ingreso:</strong> " . $fila['anioIngreso'] . "</p>";
-                  echo "<p><strong>Año de Egreso:</strong> " . $fila['anioEgreso'] . "</p>";
-                }
-              } else {
-                echo "<p>No se encontraron datos para este usuario.</p>";
+            <?php
+            if ($resultado->num_rows > 0) {
+              // Mostrar los datos de la tabla
+              while ($fila = $resultado->fetch_assoc()) {
+                // Captura la especialidad mediante el codigo de especialidad y lo muestra
+                $codEsp = $fila['codEsp'];
+                $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
+                $stmtEsp = $conn->prepare($sqlEsp);
+                $stmtEsp->bind_param("i", $codEsp);
+                $stmtEsp->execute();
+                $resultEsp = $stmtEsp->get_result();
+                $filaEsp = $resultEsp->fetch_assoc();
+                $nomEsp = $filaEsp['nomEsp'];
+            ?>
+                <div class="profile-container">
+                  <img src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png" alt="user" />
+                  <div>
+                    <?php
+                    echo "<p><strong>Nombres:</strong>" . $fila['nombres'] . "</p>";
+                    echo "<p><strong>Apellido Paterno:</strong>" . $fila['apPaterno'] . "</p>";
+                    echo "<p><strong>Apellido Materno:</strong>" . $fila['apMaterno'] . "</p>";
+                    ?>
+                  </div>
+                </div>
+                <div class="data-container">
+                  <div class="data-column">
+                    <?php
+                    echo "<div><span><strong>Tipo de Documento:</strong></span><p>" . $fila['tipoDocu'] . "</p></div>";
+                    echo "<div><span><strong>Teléfono:</strong></span><p> " . $fila['telf'] . "</p></div>";
+                    echo "<div><span><strong>Celular:</strong></span><p> " . $fila['celular'] . "</p></div>";
+                    echo "<div><span><strong>Especialidad:</strong></span><p> " . $nomEsp . "</p></div>";
+                    ?>
+                  </div>
+                  <div class="data-column">
+                    <?php
+                    echo "<div><span><strong>Número de Documento:</strong></span><p>" . $fila['nroDocu'] . "</p></div>";
+                    echo "<div><span><strong>Correo JP:</strong></span><p> " . $fila['correoJP'] . "</p></div>";
+                    echo "<div><span><strong>Dirección:</strong></span><p> " . $fila['direccion'] . "</p></div>";
+                    echo "<div><span><strong>Año de Ingreso:</strong></span><p> " . $fila['anioIngreso'] . "</p></div>";
+                    ?>
+                  </div>
+                  <div class="data-column">
+                    <?php
+                    echo "<div><span><strong>Código Modular:</strong></span><p> " . $fila['codModular'] . "</p></div>";
+                    echo "<div><span><strong>Correo Personal:</strong></span><p> " . $fila['correoPersonal'] . "</p></div>";
+                    echo "<div><span><strong>Código de Distrito:</strong></span><p> " . $fila['codDis'] . "</p></div>";
+                    echo "<div><span><strong>Año de Egreso:</strong></span><p> " . $fila['apMaterno'] . "</p></div>";
+                    ?>
+                  </div>
+                </div>
+            <?php
               }
-              // Cerrar la conexión
-              $stmt->close();
-              $conn->close();
-              ?>
-            </div>
+            } else {
+              echo "<p>No se encontraron datos para este usuario.</p>";
+            }
+            // Cerrar la conexión
+            $stmt->close();
+            $conn->close();
+            ?>
           </div>
         </div>
       </div>
