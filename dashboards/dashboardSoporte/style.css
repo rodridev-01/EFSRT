@@ -1003,66 +1003,72 @@ body::-webkit-scrollbar-thumb {
   }
 }
 
-/* Estilos para el contenedor de tarjetas */
 .card-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 20px;
+  gap: 30px;  
+  padding: 20px;
   margin-top: 20px;
 }
 
-/* Estilos para las tarjetas */
+/* Estilo de las tarjetas */
 .card {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 15px;
+  background-color: #fefefe;
+  border: 1px solid #e0e0e0; 
+  border-radius: 12px; 
+  padding: 20px;
   width: 100%;
   max-width: 350px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between;
 }
 
-/* Estilos al hacer hover en la tarjeta */
+/* Efecto hover en las tarjetas */
 .card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-8px); 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
 /* Contenido de la tarjeta */
 .card-content {
-  margin-bottom: 10px;
+  margin-bottom: 15px; 
 }
 
-/* Estilo del título (nombre completo) */
 .card h3 {
-  margin: 0 0 10px;
-  font-size: 1.2em;
+  margin: 0 0 15px;
+  font-size: 1.3em; 
   color: #333;
+  font-weight: bold;
 }
 
-/* Estilos para el texto dentro de la tarjeta */
 .card p {
-  margin: 5px 0;
-  color: #555;
+  margin: 8px 0;
+  color: #666;
+  font-size: 1em;
+  line-height: 1.5; 
 }
 
-/* Botones de acción */
 .card-actions {
-  margin-top: 10px;
-  text-align: right;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end; 
 }
 
 /* Estilo para los botones */
 .btn {
-  padding: 8px 12px;
+  padding: 10px 16px;
   font-size: 14px;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px; 
   cursor: pointer;
   transition: background-color 0.3s ease;
   display: inline-flex;
   align-items: center;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Añadir sombra a los botones */
 }
 
 .btn-warning {
@@ -1084,9 +1090,8 @@ body::-webkit-scrollbar-thumb {
   background-color: #4cae4c;
 }
 
-/* Iconos dentro de los botones */
 .fa-user-pen, .fa-address-card {
-  margin-right: 5px;
+  margin-right: 8px; 
 }
 
 /* Responsividad */
@@ -1094,6 +1099,7 @@ body::-webkit-scrollbar-thumb {
   .card-container {
       flex-direction: column;
       align-items: center;
+      gap: 20px; 
   }
   
   .card {
