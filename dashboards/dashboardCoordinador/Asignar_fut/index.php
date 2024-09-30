@@ -23,6 +23,26 @@ $resultDocente = $conexion->query($sqlDocente);
 if (!$resultDocente) {
     die("Error en la consulta de docentes: " . $conexion->error);
 }
+
+// Obtener datos del solicitante
+$sqlSolicitante = "SELECT nombres, apPaterno, apMaterno FROM solicitante WHERE codLogin = ?";
+$stmtSolicitante = $conexion->prepare($sqlSolicitante);
+$stmtSolicitante->bind_param("i", $codSoli);
+$stmtSolicitante->execute();
+$resultSolicitante = $stmtSolicitante->get_result();
+$rowSolicitante = $resultSolicitante->fetch_assoc();
+$nombres = $rowSolicitante['nombres'];
+$apPaterno = $rowSolicitante['apPaterno'];
+$apMaterno = $rowSolicitante['apMaterno'];
+
+
+$query = "SELECT apPaterno, apMaterno, nombres, tipoDocu, nroDocu, codModular, telf, celular, correoJP, correoPersonal, direccion, anioIngreso, anioEgreso FROM solicitante WHERE codLogin = ?";
+$stmt = mysqli_prepare($conexion, $query);
+mysqli_stmt_bind_param($stmt, 'i', $codLogin);
+mysqli_stmt_execute($stmt);
+mysqli_stmt_bind_result($stmt, $apPaterno, $apMaterno, $nombres, $tipoDocu, $nroDocu, $codModular, $telf, $celular, $correoJP, $correoPersonal, $direccion, $anioIngreso, $anioEgreso);
+mysqli_stmt_fetch($stmt);
+mysqli_stmt_close($stmt);
 ?>
 
 <!DOCTYPE html>
