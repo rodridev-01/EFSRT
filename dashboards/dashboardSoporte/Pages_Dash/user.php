@@ -1,7 +1,7 @@
 <?php
 session_start(); // Asegúrate de que las sesiones estén habilitadas
 
-include("db_conexion.php");
+include("../src/db_conexion.php");
 
 // Usar un código fijo para esta consulta
 $codLoginFijo = 74;
