@@ -1,9 +1,12 @@
 <?php
 session_start();
 $codSoli = $_SESSION['codLogin'];
-include 'src/php/db_conexion.php';
+include 'formulario_fut/php/db_conexion.php';
 
-// Para jalar los datos y imprimirse
+// Recibir el término de búsqueda
+$searchTerm = isset($_POST['search']) ? trim($_POST['search']) : '';
+
+// Consulta para obtener los datos del solicitante
 $sqlSolicitante = "SELECT nombres, apPaterno, apMaterno, codEsp FROM solicitante WHERE codLogin = ?";
 $stmtSolicitante = $conexion->prepare($sqlSolicitante);
 $stmtSolicitante->bind_param("i", $codSoli);
@@ -15,13 +18,20 @@ $apPaterno = $rowSolicitante['apPaterno'];
 $apMaterno = $rowSolicitante['apMaterno'];
 $codEsp = $rowSolicitante['codEsp'];
 
-// Para jalar los datos y mostrar del fut
-$sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado, archivo_pdf FROM fut WHERE codSoli = ?";
-$stmtFut = $conexion->prepare($sqlFut);
-$stmtFut->bind_param("i", $codSoli);
+// Consulta para obtener el FUT del solicitante con o sin filtro de búsqueda
+if (!empty($searchTerm)) {
+  $sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado, archivo_pdf FROM fut WHERE codSoli = ? AND nroFut LIKE ?";
+  $searchTerm = "%$searchTerm%";
+  $stmtFut = $conexion->prepare($sqlFut);
+  $stmtFut->bind_param("is", $codSoli, $searchTerm);
+} else {
+  $sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado, archivo_pdf FROM fut WHERE codSoli = ?";
+  $stmtFut = $conexion->prepare($sqlFut);
+  $stmtFut->bind_param("i", $codSoli);
+}
+
 $stmtFut->execute();
 $resultFut = $stmtFut->get_result();
-
 ?>
 
 <!DOCTYPE html>
@@ -102,67 +112,59 @@ $resultFut = $stmtFut->get_result();
     </ul>
   </nav>
 
-  <?php
-  // Captura la especialidad mediante el codigo de especialidad y lo muestra
-  $sqlEsp = "SELECT nomEsp FROM especialidad WHERE codEsp = ?";
-  $stmtEsp = $conexion->prepare($sqlEsp);
-  $stmtEsp->bind_param("i", $codEsp);
-  $stmtEsp->execute();
-  $resultEsp = $stmtEsp->get_result();
-  $filaEsp = $resultEsp->fetch_assoc();
-  $nomEsp = $filaEsp['nomEsp'];
-  ?>
   <section class="content">
     <div class="left-content">
       <div class="search-and-check">
-        <form class="search-box">
-          <input type="text" placeholder="Buscar..." />
-          <i class="bx bx-search"></i>
+        <!-- Search Box -->
+        <form class="search-box" method="POST" action="">
+          <input type="text" name="search" placeholder="Buscar..." />
+          <button type="submit"><i class="bx bx-search"></i></button>
         </form>
       </div>
 
       <div class="upcoming-events">
-        <h1>FUTs del Alumno</h1>
+        <h1>Tablero</h1>
 
+        <!-- Para mostrar el fut en el dashboard -->
+        <h2>FUTs del Alumno</h2>
         <div class="fut-container">
-          <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
-            <div class="card fut-card">
-              <form class="form-solicitud" action="src/actualizar.php" method="POST" id="miFormulario" enctype="multipart/form-data">
-                <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
+          <?php if ($resultFut->num_rows > 0): ?>
+            <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
+              <div class="card fut-card">
+                <form class="form-solicitud" action="formulario_fut/actualizar.php" method="POST" id="miFormulario" enctype="multipart/form-data">
+                  <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
 
-                <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
-                <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
-                <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
-                <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
-                <p><strong>Especialidad:</strong> <?php echo $nomEsp; ?></p>
-                <p><strong>Estado:</strong> <?php echo $rowFut['estado'] == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
+                  <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
+                  <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
+                  <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
+                  <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
+                  <p><strong>Especialidad:</strong> <?php echo $nomEsp; ?></p>
+                  <p><strong>Estado:</strong> <?php echo $rowFut['estado'] == 'H' ? 'Habilitado' : 'Inhabilitado'; ?></p>
 
-                <?php if (!empty($rowFut['archivo_pdf'])): ?>
-                  <div class="form-group">
-                    <label for="documento">Subir archivo</label>
-                    <p>
-                      <a href="../dashboardDocente/formulario_fut/uploads/<?php echo $rowFut['archivo_pdf']; ?>" target="_blank">Abrir archivo existente</a>
-                    </p>
-                    <p>
-                      <label for="nuevoDocumento">Subir nuevo documento (opcional)</label>
-                      <input type="file" id="nuevoDocumento" name="nuevoDocumento">
-                      <label for="nuevoDocumento">Tamaño maximo: 2Mb</label>
-                    </p>
-                  </div>
-                  <button type="submit">Enviar</button>
-                <?php else: ?>
-                  <!--<input type="file" id="nuevoDocumento" name="nuevoDocumento" required>-->
-                  <label>Sin documentos para revisar</label>
-                <?php endif; ?>
-
-
-              </form>
-
-            </div>
-          <?php } ?>
+                  <?php if (!empty($rowFut['archivo_pdf'])): ?>
+                    <div class="form-group">
+                      <label for="documento">Subir archivo</label>
+                      <p>
+                        <a href="../dashboardDocente/formulario_fut/uploads/<?php echo $rowFut['archivo_pdf']; ?>" target="_blank">Abrir archivo existente</a>
+                      </p>
+                      <p>
+                        <label for="nuevoDocumento">Subir nuevo documento (opcional)</label>
+                        <input type="file" id="nuevoDocumento" name="nuevoDocumento">
+                        <label for="nuevoDocumento">Tamaño maximo: 2Mb</label>
+                      </p>
+                    </div>
+                    <button type="submit">Enviar</button>
+                  <?php else: ?>
+                    <label>Sin documentos para revisar</label>
+                  <?php endif; ?>
+                </form>
+              </div>
+            <?php } ?>
+          <?php else: ?>
+            <p>No existe ningún FUT con el número especificado.</p>
+          <?php endif; ?>
         </div>
       </div>
-
     </div>
 
     <div class="right-content">
@@ -212,7 +214,7 @@ $resultFut = $stmtFut->get_result();
                 src="https://cdn-icons-png.flaticon.com/512/7816/7816916.png"
                 alt="User Icon" />
               <p>Usuario <span><a target="_blank"
-                    href="https://github.com/Alonso-dev651">Developer</a></span></p>
+                    href="https://github.com/Alonso-dev651/EFSRT">Developer</a></span></p>
             </div>
             <small>1 hour ago</small>
           </div>
