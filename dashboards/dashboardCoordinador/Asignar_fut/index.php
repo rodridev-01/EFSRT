@@ -36,8 +36,6 @@ $nombres = $rowSolicitante['nombres'];
 $apPaterno = $rowSolicitante['apPaterno'];
 $apMaterno = $rowSolicitante['apMaterno'];
 
-
-
 $query = "SELECT apPaterno, apMaterno, nombres, tipoDocu, nroDocu, codModular, telf, celular, correoJP, correoPersonal, direccion, anioIngreso, anioEgreso FROM solicitante WHERE codLogin = ?";
 $stmt = mysqli_prepare($conexion, $query);
 mysqli_stmt_bind_param($stmt, 'i', $codLogin);
@@ -69,7 +67,7 @@ mysqli_stmt_close($stmt);
   <nav class="main-menu">
     <div>
       <div class="logo">
-        <img src="../Pages_Dash/Logo.ico" alt="logo" />
+        <img src="../Pages_Dash/Logo.ico" alt="logoPardo" />
       </div>
 
       <div class="user-info">
