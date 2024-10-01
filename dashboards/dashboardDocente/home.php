@@ -135,7 +135,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nroFut'])) {
       <div class="search-and-check">
         <form class="search-box" method="POST" action="">
           <input type="text" name="nroFut" placeholder="Buscar número de FUT..." required />
-          <i class="bx bx-search"></i>
           <button type="submit" aria-label="Buscar"><i class="bx bx-search"></i></button>
         </form>
       </div>

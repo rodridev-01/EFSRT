@@ -236,13 +236,16 @@ body {
   font-weight: 400;
 }
 
-.search-box i {
+.search-box button {
   position: absolute;
   right: 11%;
   top: 25%;
   font-size: 1.3rem;
   color: var(--primary-color);
   cursor: pointer;
+  border:0;
+  background: var(--card-bg-color);
+  padding-right: 1rem;
 }
 
 /* HEADER */
