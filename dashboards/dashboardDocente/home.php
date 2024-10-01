@@ -14,14 +14,42 @@ $nombres = $rowSolicitante['nombres'];
 $apPaterno = $rowSolicitante['apPaterno'];
 $apMaterno = $rowSolicitante['apMaterno'];
 
-// Para jalar todos los datos de FUTs y mostrarlos
-$sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado FROM fut WHERE CodDocente = ?";
-$stmtFut = $conexion->prepare($sqlFut);
-$stmtFut->bind_param("i", $codSoli);
-$stmtFut->execute();
-$resultFut = $stmtFut->get_result();
+// Inicializar variable para mostrar mensaje
+$mensaje = '';
+$futEncontrados = [];
 
-//Para jalar los datos del docente e imprimirlos
+// Manejar la búsqueda de FUT
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['nroFut'])) {
+  $nroFutBuscado = $_POST['nroFut'];
+
+  // Consultar FUT por número
+  $sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado FROM fut WHERE CodDocente = ? AND nroFut = ?";
+  $stmtFut = $conexion->prepare($sqlFut);
+  $stmtFut->bind_param("ii", $codSoli, $nroFutBuscado);
+  $stmtFut->execute();
+  $resultFut = $stmtFut->get_result();
+
+  // Comprobar si se encontraron resultados
+  if ($resultFut->num_rows > 0) {
+    while ($rowFut = $resultFut->fetch_assoc()) {
+      $futEncontrados[] = $rowFut;
+    }
+  } else {
+    $mensaje = "Usted no tiene FUTs asignados.";
+  }
+} else {
+  // Para jalar todos los datos de FUTs y mostrarlos si no hay búsqueda
+  $sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado FROM fut WHERE CodDocente = ?";
+  $stmtFut = $conexion->prepare($sqlFut);
+  $stmtFut->bind_param("i", $codSoli);
+  $stmtFut->execute();
+  $resultFut = $stmtFut->get_result();
+  // Cargar los FUTs si hay
+  while ($rowFut = $resultFut->fetch_assoc()) {
+    $futEncontrados[] = $rowFut;
+  }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -105,48 +133,53 @@ $resultFut = $stmtFut->get_result();
   <section class="content">
     <div class="left-content">
       <div class="search-and-check">
-        <form class="search-box">
-          <input type="text" placeholder="Buscar..." />
+        <form class="search-box" method="POST" action="">
+          <input type="text" name="nroFut" placeholder="Buscar número de FUT..." required />
           <i class="bx bx-search"></i>
+          <button type="submit" aria-label="Buscar"><i class="bx bx-search"></i></button>
         </form>
       </div>
 
       <div class="upcoming-events">
-        <!-- Para mostrar el fut en el dashboard -->
         <h1>FUTs Asignados</h1>
-        <div class="input-row">
-          <div class="especialidad">
-          </div>
-        </div>
+        <?php if (!empty($mensaje)): ?>
+          <p><?php echo $mensaje; ?></p>
+        <?php endif; ?>
+
         <div class="fut-container">
-          <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
-            <div class="card fut-card">
-              <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
-              <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
-              <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
-              <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
-              <p><strong>Estado:</strong>
-                <?php
-                if ($rowFut['estado'] == 'A') {
-                  echo 'Aprobado';
-                } else if ($rowFut['estado'] == 'D') {
-                  echo 'Desaprobado';
-                } else if ($rowFut['estado'] == 'H') {
-                  echo 'Habilitado';
-                }
-                ?>
+          <?php if (!empty($futEncontrados)): ?>
+            <?php foreach ($futEncontrados as $rowFut): ?>
+              <div class="card fut-card">
+                <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
+                <p><strong>Año FUT:</strong> <?php echo $rowFut['anioFut']; ?></p>
+                <p><strong>Fecha y Hora de Ingreso:</strong> <?php echo $rowFut['fecHorIng']; ?></p>
+                <p><strong>Solicitud:</strong> <?php echo $rowFut['solicito']; ?></p>
+                <p><strong>Estado:</strong>
+                  <?php
+                  if ($rowFut['estado'] == 'A') {
+                    echo 'Aprobado';
+                  } elseif ($rowFut['estado'] == 'D') {
+                    echo 'Desaprobado';
+                  } elseif ($rowFut['estado'] == 'H') {
+                    echo 'Habilitado';
+                  }
+                  ?>
+                </p>
 
                 <!-- Botón para enviar datos de este FUT -->
-              <form action="pages/formularioFUT.php" method="post">
-                <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
-                <input type="hidden" name="anioFut" value="<?php echo $rowFut['anioFut']; ?>">
-                <input type="hidden" name="fecHorIng" value="<?php echo $rowFut['fecHorIng']; ?>">
-                <input type="hidden" name="solicito" value="<?php echo $rowFut['solicito']; ?>">
-                <input type="hidden" name="estado" value="<?php echo $rowFut['estado']; ?>">
-                <button type="submit" class="fut-button">Revisar FUT</button>
-              </form>
-            </div>
-          <?php } ?>
+                <form action="formulario_fut/formularioFUT.php" method="post">
+                  <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
+                  <input type="hidden" name="anioFut" value="<?php echo $rowFut['anioFut']; ?>">
+                  <input type="hidden" name="fecHorIng" value="<?php echo $rowFut['fecHorIng']; ?>">
+                  <input type="hidden" name="solicito" value="<?php echo $rowFut['solicito']; ?>">
+                  <input type="hidden" name="estado" value="<?php echo $rowFut['estado']; ?>">
+                  <button type="submit" class="fut-button">Revisar FUT</button>
+                </form>
+              </div>
+            <?php endforeach; ?>
+          <?php else: ?>
+            <p>No hay FUTs asignados.</p>
+          <?php endif; ?>
           <br>
         </div>
       </div>
