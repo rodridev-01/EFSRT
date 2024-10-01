@@ -1,7 +1,7 @@
 <?php
 session_start();
 $codSoli = $_SESSION['codLogin'];
-include './formulario_fut/php/db_conexion.php';
+include 'formulario_fut/php/db_conexion.php';
 
 // Obtener datos del solicitante
 $sqlSolicitante = "SELECT nombres, apPaterno, apMaterno FROM solicitante WHERE codLogin = ?";
@@ -14,9 +14,20 @@ $nombres = $rowSolicitante['nombres'];
 $apPaterno = $rowSolicitante['apPaterno'];
 $apMaterno = $rowSolicitante['apMaterno'];
 
-// Obtener todos los datos de los FUTs
-$sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado FROM fut";
-$stmtFut = $conexion->prepare($sqlFut);
+// Recibir el término de búsqueda
+$searchTerm = isset($_POST['search']) ? trim($_POST['search']) : '';
+
+// Consulta para obtener los datos del FUT con o sin filtro de búsqueda
+if (!empty($searchTerm)) {
+  $sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado FROM fut WHERE nroFut LIKE ?";
+  $searchTerm = "%$searchTerm%";
+  $stmtFut = $conexion->prepare($sqlFut);
+  $stmtFut->bind_param("s", $searchTerm);
+} else {
+  $sqlFut = "SELECT nroFut, anioFut, fecHorIng, solicito, estado FROM fut";
+  $stmtFut = $conexion->prepare($sqlFut);
+}
+
 $stmtFut->execute();
 $resultFut = $stmtFut->get_result();
 ?>
@@ -102,9 +113,9 @@ $resultFut = $stmtFut->get_result();
   <section class="content">
     <div class="left-content">
       <div class="search-and-check">
-        <form class="search-box">
-          <input type="text" placeholder="Buscar..." />
-          <i class="bx bx-search"></i>
+        <form class="search-box" method="POST" action="">
+          <input type="text" name="search" placeholder="Buscar por número de FUT..." />
+          <button type="submit"><i class="bx bx-search"></i></button>
         </form>
       </div>
 
@@ -116,9 +127,9 @@ $resultFut = $stmtFut->get_result();
           <div class="especialidad">
             <div class="form-group">
 
-              <button onclick="window.location.href='../formulariodocs/formulariosdocs.php'" class="fut-button">Subir archivos</button> 
+              <button onclick="window.location.href='../formulariodocs/formulariosdocs.php'" class="fut-button">Subir archivos</button>
               <label for="especialidad">Especialidades</label>
-              
+
               <select id="especialida" name="especialidad" required>
                 <option value="" disabled selected>Especialidad</option>
                 <?php include './Mostrar/Mostrar_especialidades.php'; ?>
@@ -151,7 +162,8 @@ $resultFut = $stmtFut->get_result();
       </div>
     </div>
 
-    
+
   </section>
 </body>
+
 </html>
