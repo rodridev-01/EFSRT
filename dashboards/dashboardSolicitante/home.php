@@ -1,7 +1,7 @@
 <?php
 session_start();
 $codSoli = $_SESSION['codLogin'];
-include 'formulario_fut/php/db_conexion.php';
+include 'src/php/db_conexion.php';
 
 // Recibir el término de búsqueda
 $searchTerm = isset($_POST['search']) ? trim($_POST['search']) : '';
@@ -131,7 +131,7 @@ $resultFut = $stmtFut->get_result();
           <?php if ($resultFut->num_rows > 0): ?>
             <?php while ($rowFut = $resultFut->fetch_assoc()) { ?>
               <div class="card fut-card">
-                <form class="form-solicitud" action="formulario_fut/actualizar.php" method="POST" id="miFormulario" enctype="multipart/form-data">
+                <form class="form-solicitud" action="src/actualizar.php" method="POST" id="miFormulario" enctype="multipart/form-data">
                   <input type="hidden" name="nroFut" value="<?php echo $rowFut['nroFut']; ?>">
 
                   <p><strong>Número FUT:</strong> <?php echo $rowFut['nroFut']; ?></p>
@@ -145,7 +145,7 @@ $resultFut = $stmtFut->get_result();
                     <div class="form-group">
                       <label for="documento">Subir archivo</label>
                       <p>
-                        <a href="../dashboardDocente/formulario_fut/uploads/<?php echo $rowFut['archivo_pdf']; ?>" target="_blank">Abrir archivo existente</a>
+                        <a href="../dashboardDocente/src/uploads/<?php echo $rowFut['archivo_pdf']; ?>" target="_blank">Abrir archivo existente</a>
                       </p>
                       <p>
                         <label for="nuevoDocumento">Subir nuevo documento (opcional)</label>
